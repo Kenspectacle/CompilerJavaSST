@@ -1,8 +1,18 @@
-const fs = require('fs')
+const fs = require('fs') //read file
 
 const fileContents = fs.readFileSync('./input.txt').toString()
 
 console.log(fileContents);
+
+//initialize variables
+let start = "";
+let identifier = "";//for each identifiers
+let identifierGroup = []; //group up identifer later on
+let sym = new Map(); //set symbol as hashmap
+
+
+
+
 
 // class Scanner {
 //     constructor(input, char, )
