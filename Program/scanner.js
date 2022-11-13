@@ -1,8 +1,8 @@
 const fs = require('fs') //read file
 
-const fileContents = fs.readFileSync('./input.txt').toString()
+let text = fs.readFileSync('./input.txt').toString()
 
-console.log(fileContents);
+console.log(text);
 
 //initialize variables
 let start = "";
@@ -29,12 +29,25 @@ sym.set('<=', 0);
 sym.set('>', 0);
 sym.set('>=', 0);
 
+//single symbol list
+let singleSymbols = ['(', ')', '+', '*', '{', '}', '[', ']']
 
+//iterate through the text
+while (text.length > 0) {
+    //find starting symbol
+    start = ""; //initialize start
+    switch(true) {
+        //basic cases, parentheses
+        case singleSymbols.includes(text[0]):
+            sym.set(text[0], sym.get(text[0]) + 1); //increase by one
+            text = text.slice(1); //take out current index and move to next one
+            break;
+        case '=':
+            break;
+    }
+}
 
-
-
-// sym.set('(', sym.get('(') + 1);
-// console.log(sym.get('('));
+console.log(sym);
 
 
 
