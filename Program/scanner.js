@@ -29,6 +29,7 @@ sym.set('<=', 0);
 sym.set('>', 0);
 sym.set('>=', 0);
 sym.set('variable', 0);
+sym.set('numbers', 0);
 
 //single symbol list
 let singleSymbols = ['(', ')', '+', '*', '{', '}', '[', ']']
@@ -43,13 +44,34 @@ while (text.length > 0) {
             sym.set(text[0], sym.get(text[0]) + 1); //increase by one
             text = text.slice(1); //take out current index and move to next one
             break;
+        //empty space
+        case text[0] === " ":
+            text = text.slice(1);
+            break;
+        //numbers
+        case /^[0-9]/.test(text[0]):
+            sym.set('numbers', sym.get('numbers') + 1) //increment number by 1
+            let n = 0;
+            //while its still number look for the rest of the number
+            while(/^[0-9]/.test(text[n])) {
+                n += 1;
+                if(/^[0-9]/.test(text[n]) === false) {
+                    text = text.slice(n)
+                    break;
+                } 
+            }
         //alphabet
         case /^[a-zA-z]/.test(text[0]):
             //check for special keywords
-            console.log('test');
+            // console.log('test');
             if (text[1] !== undefined) {
+                //end of string
                 break;
-            }
+            } else if (text[1] === " ") {
+                //empty space
+                sym.set('variable', sym.get('variable') + 1); //increment number of variable
+                text = text.slice(1);
+            } else if (text[1])
             break;
     }
 }
