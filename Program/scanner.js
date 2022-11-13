@@ -10,6 +10,31 @@ let identifier = "";//for each identifiers
 let identifierGroup = []; //group up identifer later on
 let sym = new Map(); //set symbol as hashmap
 
+//initialize hashmap
+sym.set('if', 0);
+sym.set('(', 0);
+sym.set(')', 0);
+sym.set('+', 0);
+sym.set('*', 0);
+sym.set('{', 0);
+sym.set('}', 0);
+sym.set('[', 0);
+sym.set(']', 0);
+sym.set('class', 0);
+sym.set('public', 0);
+sym.set('void', 0);
+sym.set('==', 0);
+sym.set('<', 0);
+sym.set('<=', 0);
+sym.set('>', 0);
+sym.set('>=', 0);
+
+
+
+
+
+// sym.set('(', sym.get('(') + 1);
+// console.log(sym.get('('));
 
 
 
