@@ -28,6 +28,7 @@ sym.set('<', 0);
 sym.set('<=', 0);
 sym.set('>', 0);
 sym.set('>=', 0);
+sym.set('variable', 0);
 
 //single symbol list
 let singleSymbols = ['(', ')', '+', '*', '{', '}', '[', ']']
@@ -36,13 +37,19 @@ let singleSymbols = ['(', ')', '+', '*', '{', '}', '[', ']']
 while (text.length > 0) {
     //find starting symbol
     start = ""; //initialize start
-    switch(true) {
-        //basic cases, parentheses
+    switch (true) {
+        //basic cases, single symbols
         case singleSymbols.includes(text[0]):
             sym.set(text[0], sym.get(text[0]) + 1); //increase by one
             text = text.slice(1); //take out current index and move to next one
             break;
-        case '=':
+        //alphabet
+        case /^[a-zA-z]/.test(text[0]):
+            //check for special keywords
+            console.log('test');
+            if (text[1] !== undefined) {
+                break;
+            }
             break;
     }
 }
