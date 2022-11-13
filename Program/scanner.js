@@ -1,14 +1,12 @@
 const fs = require('fs')
 
-const fileContents = fs.readFileSync('./myFile').toString()
+const fileContents = fs.readFileSync('./input.txt').toString()
 
-class Scanner {
-    constructor(input, char, )
-}
+console.log(fileContents);
 
-
-
-
+// class Scanner {
+//     constructor(input, char, )
+// }
 
 
 
@@ -16,29 +14,33 @@ class Scanner {
 
 
 
-let text = ""
-let start = ""
 
 
 
-let next = () => {
-    return;
-}
 
-let error = () => {
-    console.error("Invalid First Character")
-}
+// let text = ""
+// let start = ""
 
-let first = (ch) => {
-    //check what kind of character is it
-    switch(c) {
-        case 'i':
-            break; //possibility of if
-        default:
-            error();
-    }
-}
 
-let scanner = (text) => {
 
-}
+// let next = () => {
+//     return;
+// }
+
+// let error = () => {
+//     console.error("Invalid First Character")
+// }
+
+// let first = (ch) => {
+//     //check what kind of character is it
+//     switch(c) {
+//         case 'i':
+//             break; //possibility of if
+//         default:
+//             error();
+//     }
+// }
+
+// let scanner = (text) => {
+
+// }
