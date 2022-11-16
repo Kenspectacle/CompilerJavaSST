@@ -38,6 +38,7 @@ let singleSymbols = ['(', ')', '+', '*', '{', '}', '[', ']']
 while (text.length > 0) {
     //find starting symbol
     start = text[0]; //initialize start
+    // console.log(sym);
     switch (true) {
         //basic cases, single symbols
         case singleSymbols.includes(start):
@@ -65,18 +66,26 @@ while (text.length > 0) {
 
             //base case end of line
             // console.log('test');
-            if (text[1] !== undefined) {
+            if (text[1] === undefined) {
                 //end of string
+                sym.set('variable', sym.get('variable') + 1); //increment number of variable
+                text = text.slice(1);
                 break;
             } else if (text[1] === " ") {
                 //base case 1 character word
                 sym.set('variable', sym.get('variable') + 1); //increment number of variable
                 text = text.slice(1);
-            } else if (text[1])
-            break;
+                break;
+            }
             //check for special keywords
-            switch(text[1]) {
+            switch(start) {
                 case('c'):
+                    if(text[1] + text[2] + text[3] + text[4] && text[5] === undefined || text[5] === " ") {
+                        //class keyword
+                        sym.set('class', sym.get('class') + 1); //increment by one
+                        text = text.slice(5);
+                        break;
+                    }
                 break;
                 case('p'):
                 break;
