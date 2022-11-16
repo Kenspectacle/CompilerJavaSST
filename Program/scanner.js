@@ -77,22 +77,30 @@ while (text.length > 0) {
                 text = text.slice(1);
                 break;
             }
-            //check for special keywords
+            //check for special keywords, if not found, pass the variable into variable symbol(in default)
             switch(start) {
                 case('c'):
-                    if(text[1] + text[2] + text[3] + text[4] && text[5] === undefined || text[5] === " ") {
+                    if((text[1] + text[2] + text[3] + text[4]) === "lass" && text[5] === undefined || text[5] === " ") {
                         //class keyword
                         sym.set('class', sym.get('class') + 1); //increment by one
                         text = text.slice(5);
                         break;
                     }
-                break;
+                    continue;
                 case('p'):
-                break;
+                continue;
                 case('v'):
-                break;
+                continue;
                 case('n'):
-                break;
+                continue;
+                case('i'):
+                    if(text[1] === "f" && text[2] === undefined || text[2] === " " || text[2] === "(") {
+                        sym.set('if', sym.get('if') + 1);
+                        text = text.slice(2);
+                        break;
+                    }
+                default:
+                    break;
             }
     }
 }
