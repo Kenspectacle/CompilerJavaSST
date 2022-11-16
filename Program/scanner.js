@@ -37,19 +37,19 @@ let singleSymbols = ['(', ')', '+', '*', '{', '}', '[', ']']
 //iterate through the text
 while (text.length > 0) {
     //find starting symbol
-    start = ""; //initialize start
+    start = text[0]; //initialize start
     switch (true) {
         //basic cases, single symbols
-        case singleSymbols.includes(text[0]):
-            sym.set(text[0], sym.get(text[0]) + 1); //increase by one
+        case singleSymbols.includes(start):
+            sym.set(start, sym.get(start) + 1); //increase by one
             text = text.slice(1); //take out current index and move to next one
             break;
         //empty space
-        case text[0] === " ":
+        case start === " ":
             text = text.slice(1);
             break;
         //numbers
-        case /^[0-9]/.test(text[0]):
+        case /^[0-9]/.test(start):
             sym.set('numbers', sym.get('numbers') + 1) //increment number by 1
             let n = 0;
             //while its still number look for the rest of the number
@@ -61,18 +61,30 @@ while (text.length > 0) {
                 } 
             }
         //alphabet
-        case /^[a-zA-z]/.test(text[0]):
-            //check for special keywords
+        case /^[a-zA-z]/.test(start):
+
+            //base case end of line
             // console.log('test');
             if (text[1] !== undefined) {
                 //end of string
                 break;
             } else if (text[1] === " ") {
-                //empty space
+                //base case 1 character word
                 sym.set('variable', sym.get('variable') + 1); //increment number of variable
                 text = text.slice(1);
             } else if (text[1])
             break;
+            //check for special keywords
+            switch(text[1]) {
+                case('c'):
+                break;
+                case('p'):
+                break;
+                case('v'):
+                break;
+                case('n'):
+                break;
+            }
     }
 }
 
