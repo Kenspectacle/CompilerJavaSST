@@ -1,1 +1,1 @@
-12321 class 123123 class if public
+12321 class 123123 class if public void

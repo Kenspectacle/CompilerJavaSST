@@ -54,12 +54,12 @@ while (text.length > 0) {
             sym.set('numbers', sym.get('numbers') + 1) //increment number by 1
             let n = 0;
             //while its still number look for the rest of the number
-            while(/^[0-9]/.test(text[n])) {
+            while (/^[0-9]/.test(text[n])) {
                 n += 1;
-                if(/^[0-9]/.test(text[n]) === false) {
+                if (/^[0-9]/.test(text[n]) === false) {
                     text = text.slice(n)
                     break;
-                } 
+                }
             }
         //alphabet
         case /^[a-zA-z]/.test(start):
@@ -78,27 +78,33 @@ while (text.length > 0) {
                 break;
             }
             //check for special keywords, if not found, pass the variable into variable symbol(in default)
-            switch(start) {
-                case('c'):
-                    if((text[1] + text[2] + text[3] + text[4]) === "lass" && text[5] === undefined || text[5] === " ") {
+            switch (start) {
+                case ('c'):
+                    if ((text[1] + text[2] + text[3] + text[4]) === "lass" && text[5] === undefined || text[5] === " ") {
                         //class keyword
                         sym.set('class', sym.get('class') + 1); //increment by one
                         text = text.slice(5);
                         break;
                     }
                     continue;
-                case('p'):
-                    if((text[1] + text[2] + text[3] + text[4] + text[5]) === "ublic"  && text[6] === undefined || text[6] === " " ) {
+                case ('p'):
+                    if ((text[1] + text[2] + text[3] + text[4] + text[5]) === "ublic" && text[6] === undefined || text[6] === " ") {
                         sym.set('public', sym.get('public') + 1);
                         text = text.slice(6);
+                        break;
                     }
-                continue;
-                case('v'):
-                continue;
-                case('n'):
-                continue;
-                case('i'):
-                    if(text[1] === "f" && text[2] === undefined || text[2] === " " || text[2] === "(") {
+                    continue;
+                case ('v'):
+                    if ((text[1] + text[2] + text[3] === "oid") && text[4] === undefined || text[4] === " ") {
+                        sym.set('void', sym.get('void') + 1);
+                        text = text.slice(4);
+                        break;
+                    }
+                    continue;
+                case ('n'):
+                    continue;
+                case ('i'):
+                    if (text[1] === "f" && text[2] === undefined || text[2] === " " || text[2] === "(") {
                         sym.set('if', sym.get('if') + 1);
                         text = text.slice(2);
                         break;
