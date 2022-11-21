@@ -88,6 +88,10 @@ while (text.length > 0) {
                     }
                     continue;
                 case('p'):
+                    if((text[1] + text[2] + text[3] + text[4] + text[5]) === "ublic"  && text[6] === undefined || text[6] === " " ) {
+                        sym.set('public', sym.get('public') + 1);
+                        text = text.slice(6);
+                    }
                 continue;
                 case('v'):
                 continue;
