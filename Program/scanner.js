@@ -102,8 +102,6 @@ while (text.length > 0) {
                         break;
                     }
                     continue;
-                case ('n'):
-                    continue;
                 case ('i'):
                     //if keyword
                     if (text[1] === "f" && text[2] === undefined || text[2] === " " || text[2] === "(") {
