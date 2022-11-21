@@ -29,7 +29,7 @@ sym.set('<=', 0);
 sym.set('>', 0);
 sym.set('>=', 0);
 sym.set('variable', 0);
-sym.set('numbers', 0);
+sym.set('int', 0);
 
 //single symbol list
 let singleSymbols = ['(', ')', '+', '*', '{', '}', '[', ']']
@@ -51,7 +51,7 @@ while (text.length > 0) {
             break;
         //numbers
         case /^[0-9]/.test(start):
-            sym.set('numbers', sym.get('numbers') + 1) //increment number by 1
+            sym.set('int', sym.get('int') + 1) //increment number by 1
             let n = 0;
             //while its still number look for the rest of the number
             while (/^[0-9]/.test(text[n])) {
