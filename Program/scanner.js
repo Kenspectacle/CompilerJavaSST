@@ -80,8 +80,8 @@ while (text.length > 0) {
             //check for special keywords, if not found, pass the variable into variable symbol(in default)
             switch (start) {
                 case ('c'):
+                    //class keyword
                     if ((text[1] + text[2] + text[3] + text[4]) === "lass" && text[5] === undefined || text[5] === " ") {
-                        //class keyword
                         sym.set('class', sym.get('class') + 1); //increment by one
                         text = text.slice(5);
                         break;
@@ -95,6 +95,7 @@ while (text.length > 0) {
                     }
                     continue;
                 case ('v'):
+                    //void keyword
                     if ((text[1] + text[2] + text[3] === "oid") && text[4] === undefined || text[4] === " ") {
                         sym.set('void', sym.get('void') + 1);
                         text = text.slice(4);
@@ -104,6 +105,7 @@ while (text.length > 0) {
                 case ('n'):
                     continue;
                 case ('i'):
+                    //if keyword
                     if (text[1] === "f" && text[2] === undefined || text[2] === " " || text[2] === "(") {
                         sym.set('if', sym.get('if') + 1);
                         text = text.slice(2);
