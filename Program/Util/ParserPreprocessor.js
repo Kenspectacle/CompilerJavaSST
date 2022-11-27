@@ -12,7 +12,7 @@ const scanner = require(path.resolve(__dirname, "../scannerv2.js")); // scanner
 
 let text = fs.readFileSync(path.resolve(__dirname, "../input.txt")).toString();
 scannedText = scanner(text)
-console.log(scannedText);
+console.log("scanned Text:", scannedText);
 let parserPreprocessor = (scannedText) => {
     //Removing Comments
 
@@ -54,7 +54,10 @@ let parserPreprocessor = (scannedText) => {
         p1++;
         
     }
-    return scannedText;
+    let preprocessedScannedText = scannedText;
+    console.log("preprocessed scanned text:", preprocessedScannedText);
+    return preprocessedScannedText;
 };
 
 parserPreprocessor(scannedText);
+module.exports = parserPreprocessor;
