@@ -32,4 +32,4 @@ let Scanner = (text) => {
     return result
 }
 
-module.exports.Scanner;
+module.exports = Scanner;
