@@ -16,10 +16,16 @@ let Scanner = (text) => {
     text.trim();
     while(text.length > 0) {
         //base cases ignore whitespace and newline
-        if(text[0] === " " || text[0] === "\n") {
+        if(text[0] === " ") {
             text = text.slice(1);
             continue;
         }
+        //look for newlines
+        if(text[0] === "\n") {
+            result.push("\n");
+            text = text.slice(1);
+            continue;
+        } 
         n = 0
         str = ""
         //look for words
@@ -29,6 +35,11 @@ let Scanner = (text) => {
         }
         result.push(str);
         text = text.slice(n);
+        //look for newlines
+        if(text[0] === "\n") {
+            result.push("\n");
+            text = text.slice(1);
+        }
     }
     return result
 }
