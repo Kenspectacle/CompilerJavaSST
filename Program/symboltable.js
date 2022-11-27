@@ -3,7 +3,7 @@ Symbol table for JavaSST
 Here, symbols are defined and exported in a form of an Array
 */
 
-let Symbols = [
+let symbols = [
     '(', 
     ')', 
     '+', 
@@ -27,17 +27,17 @@ let Symbols = [
 ]; //basic symbols
 
 //keywords
-Symbol.push('if');
-Symbol.push('else');
-Symbol.push('class');
-Symbol.push('final');
-Symbol.push('void');
-Symbol.push('int');
-Symbol.push('while');
-Symbol.push('public');
-Symbol.push('return');
-Symbol.push('IDENTIFIER')
-Symbol.push('NUMBER')
-Symbol.push('OTHER')
+symbols.push('if');
+symbols.push('else');
+symbols.push('class');
+symbols.push('final');
+symbols.push('void');
+symbols.push('int');
+symbols.push('while');
+symbols.push('public');
+symbols.push('return');
+symbols.push('IDENTIFIER')
+symbols.push('NUMBER')
+symbols.push('OTHER')
 
-module.exports = Symbols;
+module.exports = symbols;
