@@ -4,7 +4,7 @@ Datastructure used: Array
 Type of export: Scanner Function
 */
 
-let Scanner = (text) => {
+let scanner = (text) => {
     //initialize
     n = 0 //index search n
     str = "" //current string
@@ -44,4 +44,4 @@ let Scanner = (text) => {
     return result
 }
 
-module.exports = Scanner;
+module.exports = scanner;
