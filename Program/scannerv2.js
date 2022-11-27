@@ -18,6 +18,7 @@ let Scanner = (text) => {
         //base cases ignore whitespace and newline
         if(text[0] === " " || text[0] === "\n") {
             text = text.slice(1);
+            continue;
         }
         n = 0
         str = ""
