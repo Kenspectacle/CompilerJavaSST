@@ -14,8 +14,6 @@ let Scanner = (text) => {
 
     //base cases, ignore whitespace and newline at the end
     text.trim();
-    console.log('testsss')
-    console.log(text);
     while(text.length > 0) {
         //base cases ignore whitespace and newline
         if(text[0] === " " || text[0] === "\n") {
@@ -23,7 +21,6 @@ let Scanner = (text) => {
         }
         n = 0
         str = ""
-        console.log('qwewqeqe')
         //look for words
         while(text[n] !== " " && text[n] !== "\n" && text[n] !== undefined) {
             str += text[n]
