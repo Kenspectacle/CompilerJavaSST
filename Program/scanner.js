@@ -50,6 +50,8 @@ let singleSymbols = ['(', ')', '+', '*', '{', '}', '[', ']', '=', ';', '<', '>',
 let scanner = (text) => {
     while (text.length > 0) {
         console.log(text);
+        console.log(token);
+        console.log(tokenType);
         //find starting symbol
         start = text[0]; //initialize start
         // console.log(sym);
@@ -90,17 +92,14 @@ let scanner = (text) => {
 
                 //base case end of line
                 // console.log('test');
-                if (text[1] === undefined) {
+                if (text[1] === undefined || text[1] === " ") {
                     //end of string
                     sym.set('variable', sym.get('variable') + 1); //increment number of variable
+                    token.push(start);
+                    tokenType.push('identifier');
                     text = text.slice(1);
                     break;
-                } else if (text[1] === " ") {
-                    //base case 1 character word
-                    sym.set('variable', sym.get('variable') + 1); //increment number of variable
-                    text = text.slice(1);
-                    break;
-                }
+                } 
                 //check for special keywords, if not found, pass the variable into variable symbol(in default)
                 switch (start) {
                     case ('c'):
@@ -185,7 +184,8 @@ let scanner = (text) => {
     }
 }
 
-scanner(text);
+// scanner(text);
+scanner('int a = 1;');
 console.log(tokenType);
 
 
