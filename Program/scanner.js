@@ -47,142 +47,145 @@ sym.set('int', 0);
 let singleSymbols = ['(', ')', '+', '*', '{', '}', '[', ']', '=', ';', '<', '>', '-', ',', '/'];
 
 //iterate through the text
-while (text.length > 0) {
-    console.log(text);
-    //find starting symbol
-    start = text[0]; //initialize start
-    // console.log(sym);
-    switch (true) {
-        //basic cases, single symbols
-        case singleSymbols.includes(start):
-            sym.set(start, sym.get(start) + 1); //increase by one
-            token.push(start);
-            tokenType.push(start);
-            text = text.slice(1); //take out current index and move to next one
-            break;
-        //empty space
-        case start === " ":
-            text = text.slice(1);
-            break;
-        //new lines
-        case start === "\n":
-            text = text.slice(1);
-            break;
-        //tabs
-        case start === "\t":
-            text = text.slice(1);
-            break;
-        //numbers
-        case /^[0-9]/.test(start):
-            sym.set('int', sym.get('int') + 1) //increment number by 1
-            let n = 0;
-            //while its still number look for the rest of the number
-            while (/^[0-9]/.test(text[n])) {
-                n += 1;
-                if (/^[0-9]/.test(text[n]) === false) {
-                    text = text.slice(n)
+let scanner = (text) => {
+    while (text.length > 0) {
+        console.log(text);
+        //find starting symbol
+        start = text[0]; //initialize start
+        // console.log(sym);
+        switch (true) {
+            //basic cases, single symbols
+            case singleSymbols.includes(start):
+                sym.set(start, sym.get(start) + 1); //increase by one
+                token.push(start);
+                tokenType.push(start);
+                text = text.slice(1); //take out current index and move to next one
+                break;
+            //empty space
+            case start === " ":
+                text = text.slice(1);
+                break;
+            //new lines
+            case start === "\n":
+                text = text.slice(1);
+                break;
+            //tabs
+            case start === "\t":
+                text = text.slice(1);
+                break;
+            //numbers
+            case /^[0-9]/.test(start):
+                sym.set('int', sym.get('int') + 1) //increment number by 1
+                let n = 0;
+                //while its still number look for the rest of the number
+                while (/^[0-9]/.test(text[n])) {
+                    n += 1;
+                    if (/^[0-9]/.test(text[n]) === false) {
+                        text = text.slice(n)
+                        break;
+                    }
+                }
+            //alphabet
+            case /^[a-zA-z]/.test(start):
+
+                //base case end of line
+                // console.log('test');
+                if (text[1] === undefined) {
+                    //end of string
+                    sym.set('variable', sym.get('variable') + 1); //increment number of variable
+                    text = text.slice(1);
+                    break;
+                } else if (text[1] === " ") {
+                    //base case 1 character word
+                    sym.set('variable', sym.get('variable') + 1); //increment number of variable
+                    text = text.slice(1);
                     break;
                 }
-            }
-        //alphabet
-        case /^[a-zA-z]/.test(start):
-
-            //base case end of line
-            // console.log('test');
-            if (text[1] === undefined) {
-                //end of string
-                sym.set('variable', sym.get('variable') + 1); //increment number of variable
-                text = text.slice(1);
-                break;
-            } else if (text[1] === " ") {
-                //base case 1 character word
-                sym.set('variable', sym.get('variable') + 1); //increment number of variable
-                text = text.slice(1);
-                break;
-            }
-            //check for special keywords, if not found, pass the variable into variable symbol(in default)
-            switch (start) {
-                case ('c'):
-                    //class keyword
-                    if ((text[1] + text[2] + text[3] + text[4]) === "lass" && (text[5] === undefined || text[5]) === " ") {
-                        sym.set('class', sym.get('class') + 1); //increment by one
-                        text = text.slice(5);
-                        token.push('class');
-                        tokenType.push('class');
+                //check for special keywords, if not found, pass the variable into variable symbol(in default)
+                switch (start) {
+                    case ('c'):
+                        //class keyword
+                        if ((text[1] + text[2] + text[3] + text[4]) === "lass" && (text[5] === undefined || text[5]) === " ") {
+                            sym.set('class', sym.get('class') + 1); //increment by one
+                            text = text.slice(5);
+                            token.push('class');
+                            tokenType.push('class');
+                            break;
+                        }
+                        continue;
+                    case ('p'):
+                        //public keyword
+                        if ((text[1] + text[2] + text[3] + text[4] + text[5]) === "ublic" && text[6] === undefined || text[6] === " ") {
+                            sym.set('public', sym.get('public') + 1);
+                            text = text.slice(6);
+                            token.push('public');
+                            tokenType.push('public');
+                            break;
+                        }
+                        continue;
+                    case ('v'):
+                        //void keyword
+                        if ((text[1] + text[2] + text[3] === "oid") && (text[4] === undefined || text[4] === " ")) {
+                            sym.set('void', sym.get('void') + 1);
+                            text = text.slice(4);
+                            token.push('void');
+                            tokenType.push('void');
+                            break;
+                        }
+                    case ('i'):
+                        //if keyword
+                        if (text[1] === "f" && (text[2] === undefined || text[2] === " " || text[2] === "(")) {
+                            sym.set('if', sym.get('if') + 1);
+                            text = text.slice(2);
+                            token.push('if');
+                            tokenType.push('if');
+                            break;
+                        } else if (text[1] + text[2] === "nt" && (text[3] === undefined || text[3] === " ")) {
+                            //int keyword
+                            token.push('int');
+                            tokenType.push('int');
+                            text = text.slice(3);
+                            break;
+                        }
+                    case ('f'):
+                        if (text[1] + text[2] + text[3] + text[4] === "inal" && (text[5] === undefined || text[5] === " ")) {
+                            token.push('final');
+                            tokenType.push('final');
+                            text = text.slice(4);
+                            break;
+                        }
+                    case ('r'):
+                        if (text[1] + text[2] + text[3] + text[4] + text[5] === "eturn" && (text[6] === undefined || text[6] === " ")) {
+                            token.push('return');
+                            tokenType.push('return');
+                            text = text.slice(6);
+                            break;
+                        }
+                    case ('e'):
+                        if (text[1] + text[2] + text[3] === "lse" && (text[4] === undefined || text[4] === " ")) {
+                            token.push('else');
+                            tokenType.push('else');
+                            text = text.slice(4);
+                            break;
+                        }
+                    default:
+                        //identifiers
+                        let n = 1;
+                        identifier = start;
+                        while (/^[0-9a-z]/.test(text[n])) {
+                            identifier += text[n]
+                            n++;
+                        }
+                        text = text.slice(n);
+                        token.push(identifier);
+                        tokenType.push("identifier");
                         break;
-                    }
-                    continue;
-                case ('p'):
-                    //public keyword
-                    if ((text[1] + text[2] + text[3] + text[4] + text[5]) === "ublic" && text[6] === undefined || text[6] === " ") {
-                        sym.set('public', sym.get('public') + 1);
-                        text = text.slice(6);
-                        token.push('public');
-                        tokenType.push('public');
-                        break;
-                    }
-                    continue;
-                case ('v'):
-                    //void keyword
-                    if ((text[1] + text[2] + text[3] === "oid") && (text[4] === undefined || text[4] === " ")) {
-                        sym.set('void', sym.get('void') + 1);
-                        text = text.slice(4);
-                        token.push('void');
-                        tokenType.push('void');
-                        break;
-                    }
-                case ('i'):
-                    //if keyword
-                    if (text[1] === "f" && (text[2] === undefined || text[2] === " " || text[2] === "(")) {
-                        sym.set('if', sym.get('if') + 1);
-                        text = text.slice(2);
-                        token.push('if');
-                        tokenType.push('if');
-                        break;
-                    } else if (text[1] + text[2] === "nt" && (text[3] === undefined || text[3] === " ")) {
-                        //int keyword
-                        token.push('int');
-                        tokenType.push('int');
-                        text = text.slice(3);
-                        break;
-                    }
-                case ('f'):
-                    if (text[1] + text[2] + text[3] + text[4] === "inal" && (text[5] === undefined || text[5] === " ")) {
-                        token.push('final');
-                        tokenType.push('final');
-                        text = text.slice(4);
-                        break;
-                    }
-                case ('r'):
-                    if(text[1] + text[2] + text[3] + text[4] + text[5] === "eturn" && (text [6] === undefined || text[6] === " ")) {
-                        token.push('return');
-                        tokenType.push('return');
-                        text = text.slice(6);
-                        break;
-                    }
-                case ('e'):
-                    if(text[1] + text[2] + text[3] === "lse" && (text[4] === undefined || text [4] === " ")) {
-                        token.push('else');
-                        tokenType.push('else');
-                        text = text.slice(4);
-                        break;
-                    }
-                default:
-                    //identifiers
-                    let n = 1;
-                    identifier = start;
-                    while (/^[0-9a-z]/.test(text[n])) {
-                        identifier += text[n]
-                        n++;
-                    }
-                    text = text.slice(n);
-                    token.push(identifier);
-                    tokenType.push("identifier");
-                    break;
-            }
+                }
+        }
     }
 }
-console.log(token);
+
+scanner(text);
 console.log(tokenType);
 
 
