@@ -104,7 +104,7 @@ while (text.length > 0) {
             switch (start) {
                 case ('c'):
                     //class keyword
-                    if ((text[1] + text[2] + text[3] + text[4]) === "lass" && text[5] === undefined || text[5] === " ") {
+                    if ((text[1] + text[2] + text[3] + text[4]) === "lass" && (text[5] === undefined || text[5]) === " ") {
                         sym.set('class', sym.get('class') + 1); //increment by one
                         text = text.slice(5);
                         token.push('class');
@@ -124,23 +124,22 @@ while (text.length > 0) {
                     continue;
                 case ('v'):
                     //void keyword
-                    if ((text[1] + text[2] + text[3] === "oid") && text[4] === undefined || text[4] === " ") {
+                    if ((text[1] + text[2] + text[3] === "oid") && (text[4] === undefined || text[4] === " ")) {
                         sym.set('void', sym.get('void') + 1);
                         text = text.slice(4);
                         token.push('void');
                         tokenType.push('void');
                         break;
                     }
-                    continue;
                 case ('i'):
                     //if keyword
-                    if (text[1] === "f" && text[2] === undefined || text[2] === " " || text[2] === "(") {
+                    if (text[1] === "f" && (text[2] === undefined || text[2] === " " || text[2] === "(")) {
                         sym.set('if', sym.get('if') + 1);
                         text = text.slice(2);
                         token.push('if');
                         tokenType.push('if');
                         break;
-                    } else if (text[1] + text[2] === "nt" && text[3] === undefined || text[3] === " ") {
+                    } else if (text[1] + text[2] === "nt" && (text[3] === undefined || text[3] === " ")) {
                         //int keyword
                         token.push('int');
                         tokenType.push('int');
@@ -148,21 +147,21 @@ while (text.length > 0) {
                         break;
                     }
                 case ('f'):
-                    if (text[1] + text[2] + text[3] + text[4] === "inal" && text[5] === undefined || text[5] === " ") {
+                    if (text[1] + text[2] + text[3] + text[4] === "inal" && (text[5] === undefined || text[5] === " ")) {
                         token.push('final');
                         tokenType.push('final');
                         text = text.slice(4);
                         break;
                     }
                 case ('r'):
-                    if(text[1] + text[2] + text[3] + text[4] + text[5] === "eturn" && text [6] === undefined || text[6] === " ") {
+                    if(text[1] + text[2] + text[3] + text[4] + text[5] === "eturn" && (text [6] === undefined || text[6] === " ")) {
                         token.push('return');
                         tokenType.push('return');
                         text = text.slice(6);
                         break;
                     }
                 case ('e'):
-                    if(text[1] + text[2] + text[3] === "lse" && text[4] === undefined || text [4] === " ") {
+                    if(text[1] + text[2] + text[3] === "lse" && (text[4] === undefined || text [4] === " ")) {
                         token.push('else');
                         tokenType.push('else');
                         text = text.slice(4);
