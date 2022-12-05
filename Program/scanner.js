@@ -49,9 +49,6 @@ let singleSymbols = ['(', ')', '+', '*', '{', '}', '[', ']', '=', ';', '<', '>',
 //iterate through the text
 while (text.length > 0) {
     console.log(text);
-
-    console.log(token);
-    console.log(tokenType);
     //find starting symbol
     start = text[0]; //initialize start
     // console.log(sym);
@@ -108,7 +105,6 @@ while (text.length > 0) {
                 case ('c'):
                     //class keyword
                     if ((text[1] + text[2] + text[3] + text[4]) === "lass" && text[5] === undefined || text[5] === " ") {
-                        console.log("TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST")
                         sym.set('class', sym.get('class') + 1); //increment by one
                         text = text.slice(5);
                         token.push('class');
@@ -158,10 +154,23 @@ while (text.length > 0) {
                         text = text.slice(4);
                         break;
                     }
+                case ('r'):
+                    if(text[1] + text[2] + text[3] + text[4] + text[5] === "eturn" && text [6] === undefined || text[6] === " ") {
+                        token.push('return');
+                        tokenType.push('return');
+                        text = text.slice(6);
+                        break;
+                    }
+                case ('e'):
+                    if(text[1] + text[2] + text[3] === "lse" && text[4] === undefined || text [4] === " ") {
+                        token.push('else');
+                        tokenType.push('else');
+                        text = text.slice(4);
+                        break;
+                    }
                 default:
                     //identifiers
                     let n = 1;
-                    console.log('test')
                     identifier = start;
                     while (/^[0-9a-z]/.test(text[n])) {
                         identifier += text[n]
@@ -174,8 +183,6 @@ while (text.length > 0) {
             }
     }
 }
-
-console.log(sym);
 console.log(token);
 console.log(tokenType);
 
