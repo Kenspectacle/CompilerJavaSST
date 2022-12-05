@@ -43,7 +43,7 @@ sym.set('variable', 0);
 sym.set('int', 0);
 
 //single symbol list
-let singleSymbols = ['(', ')', '+', '*', '{', '}', '[', ']']
+let singleSymbols = ['(', ')', '+', '*', '{', '}', '[', ']', '=', ';', '<', '>', '-', ',', '/'];
 
 //iterate through the text
 while (text.length > 0) {
