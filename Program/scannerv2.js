@@ -26,12 +26,13 @@ let scanner = (text) => {
             text = text.slice(1);
             continue;
         } 
-        n = 0
+        n = 0;
         str = ""
         //look for words
         while(text[n] !== " " && text[n] !== "\n" && text[n] !== undefined) {
             str += text[n]
             n++;
+            //edge case: invalid word with special characters TO BE IMPLEMENTED
         }
         result.push(str);
         text = text.slice(n);

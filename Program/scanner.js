@@ -1,3 +1,12 @@
+/*
+JavaSST Scanner
+Checks the token by scanning the characters one by one
+outputs an array
+
+
+*/
+
+
 const fs = require('fs') //read file
 
 let text = fs.readFileSync('./input.txt').toString()
