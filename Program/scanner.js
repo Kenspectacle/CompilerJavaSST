@@ -3,7 +3,8 @@ JavaSST Scanner
 Checks the token by scanning the characters one by one
 outputs an array
 
-
+List of keywords in JavaSST:
+class, public, void, if, final, return, else
 */
 
 
@@ -116,6 +117,7 @@ while (text.length > 0) {
                     }
                     continue;
                 case ('p'):
+                    //public keyword
                     if ((text[1] + text[2] + text[3] + text[4] + text[5]) === "ublic" && text[6] === undefined || text[6] === " ") {
                         sym.set('public', sym.get('public') + 1);
                         text = text.slice(6);
