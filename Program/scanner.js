@@ -4,7 +4,7 @@ Checks the token by scanning the characters one by one
 outputs an array
 
 List of keywords in JavaSST:
-class, public, void, if, final, return, else
+class, public, void, if, int, final, return, else
 */
 
 
@@ -144,6 +144,10 @@ while (text.length > 0) {
                         token.push('if');
                         tokenType.push('if');
                         break;
+                    } else if (text[1] + text[2] === "nt" && text[3] === undefined || text[3] === " ") {
+                        //int keyword
+                        token.push('int');
+                        tokenType.push('int');
                     }
                 default:
                     //identifiers
