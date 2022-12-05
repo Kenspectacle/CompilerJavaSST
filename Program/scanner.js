@@ -18,6 +18,8 @@ let start = "";
 let identifier = "";//for each identifiers
 let identifierGroup = []; //group up identifer later on
 let sym = new Map(); //set symbol as hashmap
+let token = []; //make a list of tokens
+let tokenType = []; //this describes, what kind of token it is
 
 //initialize hashmap
 sym.set('if', 0);
