@@ -47,6 +47,7 @@ let singleSymbols = ['(', ')', '+', '*', '{', '}', '[', ']']
 
 //iterate through the text
 while (text.length > 0) {
+    console.log(text);
     //find starting symbol
     start = text[0]; //initialize start
     // console.log(sym);
@@ -54,10 +55,16 @@ while (text.length > 0) {
         //basic cases, single symbols
         case singleSymbols.includes(start):
             sym.set(start, sym.get(start) + 1); //increase by one
+            token.push(start);
+            tokenType.push(start);
             text = text.slice(1); //take out current index and move to next one
             break;
         //empty space
         case start === " ":
+            text = text.slice(1);
+            break;
+        //new lines
+        case start === "\n":
             text = text.slice(1);
             break;
         //numbers
@@ -93,6 +100,7 @@ while (text.length > 0) {
                 case ('c'):
                     //class keyword
                     if ((text[1] + text[2] + text[3] + text[4]) === "lass" && text[5] === undefined || text[5] === " ") {
+                        console.log("TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST")
                         sym.set('class', sym.get('class') + 1); //increment by one
                         text = text.slice(5);
                         break;
@@ -127,6 +135,9 @@ while (text.length > 0) {
 }
 
 console.log(sym);
+console.log(token);
+console.log(tokenType);
+
 
 
 
