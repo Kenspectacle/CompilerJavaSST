@@ -48,6 +48,9 @@ let singleSymbols = ['(', ')', '+', '*', '{', '}', '[', ']']
 //iterate through the text
 while (text.length > 0) {
     console.log(text);
+
+    console.log(token);
+    console.log(tokenType);
     //find starting symbol
     start = text[0]; //initialize start
     // console.log(sym);
@@ -65,6 +68,10 @@ while (text.length > 0) {
             break;
         //new lines
         case start === "\n":
+            text = text.slice(1);
+            break;
+        //tabs
+        case start === "\t":
             text = text.slice(1);
             break;
         //numbers
@@ -129,6 +136,17 @@ while (text.length > 0) {
                         break;
                     }
                 default:
+                    //identifiers
+                    let n = 1;
+                    console.log('test')
+                    identifier = start;
+                    while (/^[0-9a-z]/.test(text[n])) {
+                        identifier += text[n]
+                        n++;
+                    }
+                    text = text.slice(n);
+                    token.push(identifier);
+                    tokenType.push("identifier");
                     break;
             }
     }
