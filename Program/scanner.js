@@ -110,6 +110,8 @@ while (text.length > 0) {
                         console.log("TEEEEEEEEEEEEEEEEEEEEEEEEEEEEEST")
                         sym.set('class', sym.get('class') + 1); //increment by one
                         text = text.slice(5);
+                        token.push('class');
+                        tokenType.push('class');
                         break;
                     }
                     continue;
@@ -117,6 +119,8 @@ while (text.length > 0) {
                     if ((text[1] + text[2] + text[3] + text[4] + text[5]) === "ublic" && text[6] === undefined || text[6] === " ") {
                         sym.set('public', sym.get('public') + 1);
                         text = text.slice(6);
+                        token.push('public');
+                        tokenType.push('public');
                         break;
                     }
                     continue;
@@ -125,6 +129,8 @@ while (text.length > 0) {
                     if ((text[1] + text[2] + text[3] === "oid") && text[4] === undefined || text[4] === " ") {
                         sym.set('void', sym.get('void') + 1);
                         text = text.slice(4);
+                        token.push('void');
+                        tokenType.push('void');
                         break;
                     }
                     continue;
@@ -133,6 +139,8 @@ while (text.length > 0) {
                     if (text[1] === "f" && text[2] === undefined || text[2] === " " || text[2] === "(") {
                         sym.set('if', sym.get('if') + 1);
                         text = text.slice(2);
+                        token.push('if');
+                        tokenType.push('if');
                         break;
                     }
                 default:
