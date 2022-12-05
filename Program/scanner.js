@@ -148,6 +148,15 @@ while (text.length > 0) {
                         //int keyword
                         token.push('int');
                         tokenType.push('int');
+                        text = text.slice(3);
+                        break;
+                    }
+                case ('f'):
+                    if (text[1] + text[2] + text[3] + text[4] === "inal" && text[5] === undefined || text[5] === " ") {
+                        token.push('final');
+                        tokenType.push('final');
+                        text = text.slice(4);
+                        break;
                     }
                 default:
                     //identifiers
