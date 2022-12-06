@@ -156,7 +156,7 @@ let scanner = (text) => {
                         if (text[1] + text[2] + text[3] + text[4] === "inal" && (text[5] === undefined || text[5] === " ")) {
                             token.push('final');
                             tokenType.push('final');
-                            text = text.slice(4);
+                            text = text.slice(5);
                             break;
                         }
                     case ('r'):
