@@ -49,15 +49,18 @@ let singleSymbols = ['(', ')', '+', '*', '{', '}', '[', ']', '=', ';', '<', '>',
 //iterate through the text
 let scanner = (text) => {
     while (text.length > 0) {
-        console.log(text);
+        identifier = ""; //reinitialize the identifier
+        console.log("text:", text);
         console.log(token);
         console.log(tokenType);
+        console.log('d');
         //find starting symbol
         start = text[0]; //initialize start
         // console.log(sym);
         switch (true) {
             //basic cases, single symbols
             case singleSymbols.includes(start):
+                console.log('c');
                 sym.set(start, sym.get(start) + 1); //increase by one
                 token.push(start);
                 tokenType.push(start);
@@ -81,15 +84,18 @@ let scanner = (text) => {
                 let n = 0;
                 //while its still number look for the rest of the number
                 while (/^[0-9]/.test(text[n])) {
+                    identifier += text[n]
                     n += 1;
-                    if (/^[0-9]/.test(text[n]) === false) {
-                        text = text.slice(n)
-                        break;
-                    }
                 }
+                text = text.slice(n)
+                console.log(text);
+                token.push(identifier);
+                tokenType.push('number');
+                break;
             //alphabet
             case /^[a-zA-z]/.test(start):
-
+                console.log('testing');
+                console.log('this is not hit');
                 //base case end of line
                 // console.log('test');
                 if (text[1] === undefined || text[1] === " ") {
@@ -99,7 +105,7 @@ let scanner = (text) => {
                     tokenType.push('identifier');
                     text = text.slice(1);
                     break;
-                } 
+                }
                 //check for special keywords, if not found, pass the variable into variable symbol(in default)
                 switch (start) {
                     case ('c'):
@@ -184,9 +190,10 @@ let scanner = (text) => {
     }
 }
 
-// scanner(text);
-scanner('int a = 1;');
+scanner(text);
+// scanner('int a = 13;');
 console.log(tokenType);
+console.log(token);
 
 
 
