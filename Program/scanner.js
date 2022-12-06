@@ -175,9 +175,8 @@ let scanner = (text) => {
                         }
                     default:
                         //identifiers
-                        let n = 1;
-                        identifier = start;
-                        while (/^[0-9a-z]/.test(text[n])) {
+                        let n = 0;
+                        while (/^[0-9a-zA-Z]/.test(text[n])) {
                             identifier += text[n]
                             n++;
                         }
@@ -191,7 +190,8 @@ let scanner = (text) => {
 }
 
 scanner(text);
-// scanner('int a = 13;');
+scanner('int a = 13;');
+// scanner('class Test { final int');
 console.log(tokenType);
 console.log(token);
 
