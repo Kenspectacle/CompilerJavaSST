@@ -27,9 +27,144 @@ let text = fs.readFileSync('./input.txt').toString()
 
 //Subroutines for parsing
 
+////////////////////////////////////////////////////////////Comparison////////////////////////////////////////////////////////////
+
+let isValidLess = (tokenType) => {
+    if(tokenType[pointer] === "<") {
+        pointer++;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+let isValidMore = (tokenType) => {
+    if(tokenType[pointer] === ">") {
+        pointer++;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+////////////////////////////////////////////////////////////Arithmetic Expressions////////////////////////////////////////////////////////////
+
+let isValidPlus = (tokenType) => {
+    if(tokenType[pointer] === "+") {
+        pointer++;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+let isValidMinus = (tokenType) => {
+    if(tokenType[pointer] === "-") {
+        pointer++;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+let isValidTimes = (tokenType) => {
+    if(tokenType[pointer] === "*") {
+        pointer++;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+let isValidDivision = (tokenType) => {
+    if(tokenType[pointer] === "/") {
+        pointer++;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+////////////////////////////////////////////////////////////Curly Brackets////////////////////////////////////////////////////////////
+
+//left curly bracket
+let isValidLeftCurlyBracket = (tokenType) => {
+    if(tokenType[pointer] === "{") {
+        pointer++;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+//right curly bracket
+let isValidRightCurlyBracket = (tokenType) => {
+    if(tokenType[pointer] === "}") {
+        pointer++;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+////////////////////////////////////////////////////////////Square Brackets////////////////////////////////////////////////////////////
+
+//left square bracket
+let isValidLeftSquareBracket = (tokenType) => {
+    if(tokenType[pointer] === "[") {
+        pointer++;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+//right square bracket
+let isValidRightSquareBracket = (tokenType) => {
+    if(tokenType[pointer] === "]") {
+        pointer++;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+////////////////////////////////////////////////////////////Parenthesis////////////////////////////////////////////////////////////
+
+//left parenthesis
+let isValidLeftParenthesis = (tokenType) => {
+    if(tokenType[pointer] === "(") {
+        pointer++;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+//right parenthesis
+let isValidRightParenthesis = (tokenType) => {
+    if(tokenType[pointer] === ")") {
+        pointer++;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+////////////////////////////////////////////////////////////Datatype////////////////////////////////////////////////////////////
+
+let isValidInteger = (tokenType) => {
+    if(tokenType[pointer] === "int") {
+        pointer++;
+        return true;
+    } else {
+        return false;
+    }
+}
+
 //class
 let isValidClass = (tokenType) => {
-    // isValidLeftCurlyBracket(tokenType, pointer)
+    isValidLeftCurlyBracket(tokenType)
     pointer++;
     return true;
 
