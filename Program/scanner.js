@@ -54,17 +54,12 @@ let singleSymbols = ['(', ')', '+', '*', '{', '}', '[', ']', '=', ';', '<', '>',
 let scanner = (text) => {
     while (text.length > 0) {
         identifier = ""; //reinitialize the identifier
-        console.log("text:", text);
-        console.log(token);
-        console.log(tokenType);
-        console.log('d');
         //find starting symbol
         start = text[0]; //initialize start
         // console.log(sym);
         switch (true) {
             //basic cases, single symbols
             case singleSymbols.includes(start):
-                console.log('c');
                 sym.set(start, sym.get(start) + 1); //increase by one
                 token.push(start);
                 tokenType.push(start);
@@ -92,14 +87,11 @@ let scanner = (text) => {
                     n += 1;
                 }
                 text = text.slice(n)
-                console.log(text);
                 token.push(identifier);
                 tokenType.push('number');
                 break;
             //alphabet
             case /^[a-zA-z]/.test(start):
-                console.log('testing');
-                console.log('this is not hit');
                 //base case end of line
                 // console.log('test');
                 if (text[1] === undefined || text[1] === " ") {
@@ -191,6 +183,7 @@ let scanner = (text) => {
                 }
         }
     }
+    return token, tokenType;
 }
 
 module.exports = scanner;
