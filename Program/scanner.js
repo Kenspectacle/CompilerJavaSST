@@ -5,6 +5,10 @@ outputs an array
 
 List of keywords in JavaSST:
 class, public, void, if, int, final, return, else
+
+To Do List
+-Refactor the code
+-Implement ignore feature for comments
 */
 
 
@@ -189,11 +193,7 @@ let scanner = (text) => {
     }
 }
 
-scanner(text);
-scanner('int a = 13;');
-// scanner('class Test { final int');
-console.log(tokenType);
-console.log(token);
+module.exports = scanner;
 
 
 
