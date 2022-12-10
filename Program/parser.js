@@ -24,19 +24,41 @@ const symbolTable = require(path.resolve(__dirname, "./symboltable.js")); //symb
 let text = fs.readFileSync('./input.txt').toString()
 
 // preprocessedScannedText = parserPreprocessor(scanner(text));
+
+//Subroutines for parsing
+
+//class
+let isValidClass = (tokenType) => {
+    // isValidLeftCurlyBracket(tokenType, pointer)
+    pointer++;
+    return true;
+
+}
+
+
+
+
+
+
+let pointer = 0;
 let token, tokenType = scanner(text);
 let parser = (tokenType, symbolTable) => {
-    let pointer = 0;
     while(pointer < tokenType.length) {
         switch(true) {
             //possible starting symbols
             case(tokenType[pointer] === 'class'):
-                console.log('test');
+                pointer++;
+                // console.log("before if", pointer);
+                if(isValidClass(tokenType, pointer)) {
+                    pointer++;
+                }
                 continue;
         }
+        console.log('test');
+        console.log(pointer);
     }
-
 }
 
-console.log(tokenType, "tokentype");
+// console.log(tokenType, "tokentype");
 parser(tokenType, symbolTable);
+
