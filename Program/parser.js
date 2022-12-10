@@ -25,8 +25,18 @@ let text = fs.readFileSync('./input.txt').toString()
 
 // preprocessedScannedText = parserPreprocessor(scanner(text));
 let token, tokenType = scanner(text);
-let parser = (preprocessedScannedText, symboltable) => {
-    let p1 = 0;
+let parser = (tokenType, symbolTable) => {
+    let pointer = 0;
+    while(pointer < tokenType.length) {
+        switch(true) {
+            //possible starting symbols
+            case(tokenType[pointer] === 'class'):
+                console.log('test');
+                continue;
+        }
+    }
+
 }
 
 console.log(tokenType, "tokentype");
+parser(tokenType, symbolTable);
