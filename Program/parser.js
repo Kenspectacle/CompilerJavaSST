@@ -226,6 +226,17 @@ let isValidVoid = (tokenType) => {
 
 ////////////////////////////////////////////////////////////Complex Term////////////////////////////////////////////////////////////
 
+//statement sequence
+
+let isValidStatementSequence = (tokenType) => {
+    if(isValidSequence(tokenType)) {
+        if(isValidSequence(tokenType)) {
+            return true;
+        }
+        return true;
+    } 
+    return false;
+}
 
 //method type
 
