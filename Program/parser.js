@@ -218,16 +218,48 @@ let isValidVoid = (tokenType) => {
 ////////////////////////////////////////////////////////////Complex Term////////////////////////////////////////////////////////////
 
 //declarations
-// let isValidDeclaration = (tokenType) => {
-//     if()
-// }
+let isValidDeclaration = (tokenType) => {
+    let validityFlag = false; //gets switch to true as soon as it enters at least one loop to see if its not an empty class!
+    while (tokenType[pointer] === "final" || tokenType[pointer] === "int" || tokenType[pointer] === "public") {
+        validityFlag = true;
+        switch (true) {
+            case (tokenType[pointer] === "final"):
+                if (isValidFinal(tokenType)) {
+                    if (isValidInteger(tokenType)) {
+                        if (isValidIdentifier(tokenType)) {
+                            if (isValidEqual(TokenType)) {
+                                if (isValidExpression(TokenType)) {
+                                    if (isValidSemiColon(TokenType)) {
+                                        continue;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            case (tokenType[pointer] === "int"):
+                if (isValidInteger(tokenType)) {
+                    if (isValidIdentifier(tokenType)) {
+                        if (isValidSemiColon(tokenType)) {
+                            continue;
+                        }
+                    }
+                }
+            case (tokenType[pointer] === "public"):
+                if (isValidMethodDeclaration (tokenType)) {
+                    continue;
+                }
+        }
+    }
+    return validityFlag;
+}
 
 //class body
 
 let isValidClassBody = (tokenType) => {
     if (isValidLeftCurlyBracket(tokenType)) {
         if (isValidDeclaration(tokenType)) {
-            if(isValidRightCurlyBracket(tokenType)) {
+            if (isValidRightCurlyBracket(tokenType)) {
                 return true;
             }
         }
