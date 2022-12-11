@@ -185,6 +185,36 @@ let isValidInteger = (tokenType) => {
     }
 }
 
+////////////////////////////////////////////////////////////Special Keywords////////////////////////////////////////////////////////////
+
+let isValidFinal = (tokenType) => {
+    if (tokenType[pointer] === "Final") {
+        pointer++;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+let isValidPublic = (tokenType) => {
+    if (tokenType[pointer] === "public") {
+        pointer++;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+let isValidVoid = (tokenType) => {
+    if (tokenType[pointer] === "void") {
+        pointer++;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
 ////////////////////////////////////////////////////////////Complex Term////////////////////////////////////////////////////////////
 
 //declarations
