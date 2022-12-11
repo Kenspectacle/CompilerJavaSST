@@ -227,6 +227,21 @@ let isValidVoid = (tokenType) => {
 ////////////////////////////////////////////////////////////Complex Term////////////////////////////////////////////////////////////
 
 
+//method head
+
+let isValidMethodHead = (tokenType) {
+    if (isValidPublic(tokenType)) {
+        if (isValidMethodType(tokenType)) {
+            if(isValidIdentifier(tokenType)) {
+                if(isValidFormalParameters(tokenType)) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
 //method declaration
 let isValidMethodDeclaration = (tokenType) => {
     if (isValidMethodHead(tokenType)) {
@@ -234,7 +249,7 @@ let isValidMethodDeclaration = (tokenType) => {
             return true;
         }
     }
-        return false;
+    return false;
 }
 
 
