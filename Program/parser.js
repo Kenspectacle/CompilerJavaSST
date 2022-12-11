@@ -30,7 +30,7 @@ let text = fs.readFileSync('./input.txt').toString()
 ////////////////////////////////////////////////////////////Identifiers and Numbers////////////////////////////////////////////////////////////
 
 //identifier
-let isValidIdentifier = (tokenType) => {
+function isValidIdentifier(tokenType) {
     if (tokenType[pointer] === "identifier") {
         pointer++;
         return true;
@@ -40,7 +40,7 @@ let isValidIdentifier = (tokenType) => {
 }
 
 //number
-let isValidNumber = (tokenType) => {
+function isValidNumber(tokenType) {
     if (tokenType[pointer] === "number") {
         pointer++;
         return true;
@@ -50,7 +50,7 @@ let isValidNumber = (tokenType) => {
 }
 
 //semicolon
-let isValidSemiColon = (tokenType) => {
+function isValidSemiColon(tokenType) {
     if (tokenType[pointer] === ";") {
         pointer++;
         return true;
@@ -61,7 +61,7 @@ let isValidSemiColon = (tokenType) => {
 
 ////////////////////////////////////////////////////////////Comparison////////////////////////////////////////////////////////////
 
-let isValidLess = (tokenType) => {
+function isValidLess(tokenType) {
     if (tokenType[pointer] === "<") {
         pointer++;
         return true;
@@ -70,7 +70,7 @@ let isValidLess = (tokenType) => {
     }
 }
 
-let isValidMore = (tokenType) => {
+function isValidMore(tokenType) {
     if (tokenType[pointer] === ">") {
         pointer++;
         return true;
@@ -81,7 +81,7 @@ let isValidMore = (tokenType) => {
 
 ////////////////////////////////////////////////////////////Arithmetic Expressions////////////////////////////////////////////////////////////
 
-let isValidPlus = (tokenType) => {
+function isValidPlus(tokenType) {
     if (tokenType[pointer] === "+") {
         pointer++;
         return true;
@@ -90,7 +90,7 @@ let isValidPlus = (tokenType) => {
     }
 }
 
-let isValidMinus = (tokenType) => {
+function isValidMinus(tokenType) {
     if (tokenType[pointer] === "-") {
         pointer++;
         return true;
@@ -99,7 +99,7 @@ let isValidMinus = (tokenType) => {
     }
 }
 
-let isValidTimes = (tokenType) => {
+function isValidTimes(tokenType) {
     if (tokenType[pointer] === "*") {
         pointer++;
         return true;
@@ -108,7 +108,7 @@ let isValidTimes = (tokenType) => {
     }
 }
 
-let isValidDivision = (tokenType) => {
+function isValidDivision(tokenType) {
     if (tokenType[pointer] === "/") {
         pointer++;
         return true;
@@ -120,7 +120,7 @@ let isValidDivision = (tokenType) => {
 ////////////////////////////////////////////////////////////Curly Brackets////////////////////////////////////////////////////////////
 
 //left curly bracket
-let isValidLeftCurlyBracket = (tokenType) => {
+function isValidLeftCurlyBracket(tokenType) {
     if (tokenType[pointer] === "{") {
         pointer++;
         return true;
@@ -130,7 +130,7 @@ let isValidLeftCurlyBracket = (tokenType) => {
 }
 
 //right curly bracket
-let isValidRightCurlyBracket = (tokenType) => {
+function isValidRightCurlyBracket(tokenType) {
     if (tokenType[pointer] === "}") {
         pointer++;
         return true;
@@ -142,7 +142,7 @@ let isValidRightCurlyBracket = (tokenType) => {
 ////////////////////////////////////////////////////////////Square Brackets////////////////////////////////////////////////////////////
 
 //left square bracket
-let isValidLeftSquareBracket = (tokenType) => {
+function isValidLeftSquareBracket(tokenType) {
     if (tokenType[pointer] === "[") {
         pointer++;
         return true;
@@ -152,7 +152,7 @@ let isValidLeftSquareBracket = (tokenType) => {
 }
 
 //right square bracket
-let isValidRightSquareBracket = (tokenType) => {
+function isValidRightSquareBracket(tokenType) {
     if (tokenType[pointer] === "]") {
         pointer++;
         return true;
@@ -164,7 +164,7 @@ let isValidRightSquareBracket = (tokenType) => {
 ////////////////////////////////////////////////////////////Parenthesis////////////////////////////////////////////////////////////
 
 //left parenthesis
-let isValidLeftParenthesis = (tokenType) => {
+function isValidLeftParenthesis(tokenType) {
     if (tokenType[pointer] === "(") {
         pointer++;
         return true;
@@ -174,7 +174,7 @@ let isValidLeftParenthesis = (tokenType) => {
 }
 
 //right parenthesis
-let isValidRightParenthesis = (tokenType) => {
+function isValidRightParenthesis(tokenType) {
     if (tokenType[pointer] === ")") {
         pointer++;
         return true;
@@ -185,7 +185,7 @@ let isValidRightParenthesis = (tokenType) => {
 
 ////////////////////////////////////////////////////////////Datatype////////////////////////////////////////////////////////////
 
-let isValidInteger = (tokenType) => {
+function isValidInteger(tokenType) {
     if (tokenType[pointer] === "int") {
         pointer++;
         return true;
@@ -196,7 +196,7 @@ let isValidInteger = (tokenType) => {
 
 ////////////////////////////////////////////////////////////Special Keywords////////////////////////////////////////////////////////////
 
-let isValidFinal = (tokenType) => {
+function isValidFinal(tokenType) {
     if (tokenType[pointer] === "Final") {
         pointer++;
         return true;
@@ -205,7 +205,7 @@ let isValidFinal = (tokenType) => {
     }
 }
 
-let isValidPublic = (tokenType) => {
+function isValidPublic(tokenType) {
     if (tokenType[pointer] === "public") {
         pointer++;
         return true;
@@ -214,7 +214,7 @@ let isValidPublic = (tokenType) => {
     }
 }
 
-let isValidVoid = (tokenType) => {
+function isValidVoid(tokenType) {
     if (tokenType[pointer] === "void") {
         pointer++;
         return true;
@@ -227,18 +227,18 @@ let isValidVoid = (tokenType) => {
 ////////////////////////////////////////////////////////////Complex Term////////////////////////////////////////////////////////////
 
 // if statement
-let isValidIfStatement = (tokenType) => {
+function isValidIfStatement(tokenType) {
     if (isValidIf(tokenType)) {
-        if(isValidLeftParenthesis(tokenType)) {
-            if(isValidExpression(tokenType)) {
-                if(isValidRightParenthesis(tokenType)) {
-                    if(isValidLeftCurlyBracket(tokenType)) {
-                        if(isValidStatementSequence(tokenType)) {
-                            if(isValidRightCurlyBracket(tokenType)) {
-                                if(isValidElse(tokenType)) {
-                                    if(isValidLeftCurlyBracket(tokenType)) {
-                                        if(isValidStatementSequence(tokenType)) {
-                                            if(isValidRightCurlyBracket(tokenType)) {
+        if (isValidLeftParenthesis(tokenType)) {
+            if (isValidExpression(tokenType)) {
+                if (isValidRightParenthesis(tokenType)) {
+                    if (isValidLeftCurlyBracket(tokenType)) {
+                        if (isValidStatementSequence(tokenType)) {
+                            if (isValidRightCurlyBracket(tokenType)) {
+                                if (isValidElse(tokenType)) {
+                                    if (isValidLeftCurlyBracket(tokenType)) {
+                                        if (isValidStatementSequence(tokenType)) {
+                                            if (isValidRightCurlyBracket(tokenType)) {
                                                 return true;
                                             }
                                         }
@@ -255,7 +255,7 @@ let isValidIfStatement = (tokenType) => {
 }
 
 //statement
-let isValidStatement = (tokenType) => {
+function isValidStatement(tokenType) {
     if (isValidAssignment(tokenType)) return true;
     if (isValidProcedureCall(tokenType)) return true;
     if (isValidIfStatement(tokenType)) return true;
@@ -266,7 +266,7 @@ let isValidStatement = (tokenType) => {
 
 //statement sequence
 
-let isValidStatementSequence = (tokenType) => {
+function isValidStatementSequence(tokenType) {
     if (isValidStatement(tokenType)) {
         if (isValidStatement(tokenType)) {
             return true;
@@ -278,7 +278,7 @@ let isValidStatementSequence = (tokenType) => {
 
 //method type
 
-let isValidMethodType = (tokenType) => {
+function isValidMethodType(tokenType) {
     if (isValidVoid(tokenType)) return true;
     if (isValidInteger(tokenType)) return true;
     return false;
@@ -287,7 +287,7 @@ let isValidMethodType = (tokenType) => {
 
 //method body
 
-let isValidMethodBody = (tokenType) => {
+function isValidMethodBody(tokenType) {
     if (isValidLeftCurlyBracket(tokenType)) {
         if (isValidLocalDeclaration(tokenType)) {
             if (isValidStatementSequence(tokenType)) {
@@ -303,7 +303,7 @@ let isValidMethodBody = (tokenType) => {
 
 //method head
 
-let isValidMethodHead = (tokenType) => {
+function isValidMethodHead(tokenType) {
     if (isValidPublic(tokenType)) {
         if (isValidMethodType(tokenType)) {
             if (isValidIdentifier(tokenType)) {
@@ -317,7 +317,7 @@ let isValidMethodHead = (tokenType) => {
 }
 
 //method declaration
-let isValidMethodDeclaration = (tokenType) => {
+function isValidMethodDeclaration(tokenType) {
     if (isValidMethodHead(tokenType)) {
         if (isValidMethodBody(tokenType)) {
             return true;
@@ -328,7 +328,7 @@ let isValidMethodDeclaration = (tokenType) => {
 
 
 //declarations
-let isValidDeclaration = (tokenType) => {
+function isValidDeclaration(tokenType) {
     let validityFlag = false; //gets switch to true as soon as it enters at least one loop to see if its not an empty class!
     while (tokenType[pointer] === "final" || tokenType[pointer] === "int" || tokenType[pointer] === "public") {
         validityFlag = true;
@@ -366,7 +366,7 @@ let isValidDeclaration = (tokenType) => {
 
 //class body
 
-let isValidClassBody = (tokenType) => {
+function isValidClassBody(tokenType) {
     if (isValidLeftCurlyBracket(tokenType)) {
         if (isValidDeclaration(tokenType)) {
             if (isValidRightCurlyBracket(tokenType)) {
@@ -378,7 +378,7 @@ let isValidClassBody = (tokenType) => {
 }
 
 //class
-let isValidClass = (tokenType) => {
+function isValidClass(tokenType) {
     if (tokenType[pointer] === "class") {
         pointer++;
         if (isValidIdentifier(tokenType)) {
