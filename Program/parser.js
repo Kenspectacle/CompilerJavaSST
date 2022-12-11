@@ -227,6 +227,15 @@ let isValidVoid = (tokenType) => {
 ////////////////////////////////////////////////////////////Complex Term////////////////////////////////////////////////////////////
 
 
+//method type
+
+let isValidMethodType = (tokenType) {
+    if(isValidVoid(tokenType)) return true;
+    if(isValidInteger(tokenType)) return true;
+    return false;
+    
+}
+
 //method head
 
 let isValidMethodHead = (tokenType) {
