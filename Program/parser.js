@@ -49,6 +49,15 @@ let isValidNumber = (tokenType) => {
     }
 }
 
+//semicolon
+let isValidSemiColon = (tokenType) => {
+    if (tokenType[pointer] === ";") {
+        pointer++;
+        return true;
+    } else {
+        return false;
+    }
+}
 
 ////////////////////////////////////////////////////////////Comparison////////////////////////////////////////////////////////////
 
