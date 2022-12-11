@@ -229,7 +229,7 @@ let isValidVoid = (tokenType) => {
 
 //method type
 
-let isValidMethodType = (tokenType) {
+let isValidMethodType = (tokenType) => {
     if(isValidVoid(tokenType)) return true;
     if(isValidInteger(tokenType)) return true;
     return false;
@@ -238,7 +238,7 @@ let isValidMethodType = (tokenType) {
 
 //method head
 
-let isValidMethodHead = (tokenType) {
+let isValidMethodHead = (tokenType) => {
     if (isValidPublic(tokenType)) {
         if (isValidMethodType(tokenType)) {
             if(isValidIdentifier(tokenType)) {
