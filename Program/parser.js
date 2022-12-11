@@ -226,6 +226,34 @@ let isValidVoid = (tokenType) => {
 
 ////////////////////////////////////////////////////////////Complex Term////////////////////////////////////////////////////////////
 
+// if statement
+let isValidIfStatement = (tokenType) => {
+    if (isValidIf(tokenType)) {
+        if(isValidLeftParenthesis(tokenType)) {
+            if(isValidExpression(tokenType)) {
+                if(isValidRightParenthesis(tokenType)) {
+                    if(isValidLeftCurlyBracket(tokenType)) {
+                        if(isValidStatementSequence(tokenType)) {
+                            if(isValidRightCurlyBracket(tokenType)) {
+                                if(isValidElse(tokenType)) {
+                                    if(isValidLeftCurlyBracket(tokenType)) {
+                                        if(isValidStatementSequence(tokenType)) {
+                                            if(isValidRightCurlyBracket(tokenType)) {
+                                                return true;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return false;
+}
+
 //statement
 let isValidStatement = (tokenType) => {
     if (isValidAssignment(tokenType)) return true;
@@ -239,8 +267,8 @@ let isValidStatement = (tokenType) => {
 //statement sequence
 
 let isValidStatementSequence = (tokenType) => {
-    if (isValidSequence(tokenType)) {
-        if (isValidSequence(tokenType)) {
+    if (isValidStatement(tokenType)) {
+        if (isValidStatement(tokenType)) {
             return true;
         }
         return true;
