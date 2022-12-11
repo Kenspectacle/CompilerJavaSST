@@ -27,10 +27,33 @@ let text = fs.readFileSync('./input.txt').toString()
 
 //Subroutines for parsing
 
+////////////////////////////////////////////////////////////Identifiers and Numbers////////////////////////////////////////////////////////////
+
+//identifier
+let isValidIdentifier = (tokenType) => {
+    if (tokenType[pointer] === "identifier") {
+        pointer++;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+//number
+let isValidNumber = (tokenType) => {
+    if (tokenType[pointer] === "number") {
+        pointer++;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
 ////////////////////////////////////////////////////////////Comparison////////////////////////////////////////////////////////////
 
 let isValidLess = (tokenType) => {
-    if(tokenType[pointer] === "<") {
+    if (tokenType[pointer] === "<") {
         pointer++;
         return true;
     } else {
@@ -39,7 +62,7 @@ let isValidLess = (tokenType) => {
 }
 
 let isValidMore = (tokenType) => {
-    if(tokenType[pointer] === ">") {
+    if (tokenType[pointer] === ">") {
         pointer++;
         return true;
     } else {
@@ -50,7 +73,7 @@ let isValidMore = (tokenType) => {
 ////////////////////////////////////////////////////////////Arithmetic Expressions////////////////////////////////////////////////////////////
 
 let isValidPlus = (tokenType) => {
-    if(tokenType[pointer] === "+") {
+    if (tokenType[pointer] === "+") {
         pointer++;
         return true;
     } else {
@@ -59,7 +82,7 @@ let isValidPlus = (tokenType) => {
 }
 
 let isValidMinus = (tokenType) => {
-    if(tokenType[pointer] === "-") {
+    if (tokenType[pointer] === "-") {
         pointer++;
         return true;
     } else {
@@ -68,7 +91,7 @@ let isValidMinus = (tokenType) => {
 }
 
 let isValidTimes = (tokenType) => {
-    if(tokenType[pointer] === "*") {
+    if (tokenType[pointer] === "*") {
         pointer++;
         return true;
     } else {
@@ -77,7 +100,7 @@ let isValidTimes = (tokenType) => {
 }
 
 let isValidDivision = (tokenType) => {
-    if(tokenType[pointer] === "/") {
+    if (tokenType[pointer] === "/") {
         pointer++;
         return true;
     } else {
@@ -89,7 +112,7 @@ let isValidDivision = (tokenType) => {
 
 //left curly bracket
 let isValidLeftCurlyBracket = (tokenType) => {
-    if(tokenType[pointer] === "{") {
+    if (tokenType[pointer] === "{") {
         pointer++;
         return true;
     } else {
@@ -99,7 +122,7 @@ let isValidLeftCurlyBracket = (tokenType) => {
 
 //right curly bracket
 let isValidRightCurlyBracket = (tokenType) => {
-    if(tokenType[pointer] === "}") {
+    if (tokenType[pointer] === "}") {
         pointer++;
         return true;
     } else {
@@ -111,7 +134,7 @@ let isValidRightCurlyBracket = (tokenType) => {
 
 //left square bracket
 let isValidLeftSquareBracket = (tokenType) => {
-    if(tokenType[pointer] === "[") {
+    if (tokenType[pointer] === "[") {
         pointer++;
         return true;
     } else {
@@ -121,7 +144,7 @@ let isValidLeftSquareBracket = (tokenType) => {
 
 //right square bracket
 let isValidRightSquareBracket = (tokenType) => {
-    if(tokenType[pointer] === "]") {
+    if (tokenType[pointer] === "]") {
         pointer++;
         return true;
     } else {
@@ -133,7 +156,7 @@ let isValidRightSquareBracket = (tokenType) => {
 
 //left parenthesis
 let isValidLeftParenthesis = (tokenType) => {
-    if(tokenType[pointer] === "(") {
+    if (tokenType[pointer] === "(") {
         pointer++;
         return true;
     } else {
@@ -143,7 +166,7 @@ let isValidLeftParenthesis = (tokenType) => {
 
 //right parenthesis
 let isValidRightParenthesis = (tokenType) => {
-    if(tokenType[pointer] === ")") {
+    if (tokenType[pointer] === ")") {
         pointer++;
         return true;
     } else {
@@ -154,7 +177,7 @@ let isValidRightParenthesis = (tokenType) => {
 ////////////////////////////////////////////////////////////Datatype////////////////////////////////////////////////////////////
 
 let isValidInteger = (tokenType) => {
-    if(tokenType[pointer] === "int") {
+    if (tokenType[pointer] === "int") {
         pointer++;
         return true;
     } else {
@@ -162,29 +185,50 @@ let isValidInteger = (tokenType) => {
     }
 }
 
-//class
-let isValidClass = (tokenType) => {
-    isValidLeftCurlyBracket(tokenType)
-    pointer++;
-    return true;
+////////////////////////////////////////////////////////////Complex Term////////////////////////////////////////////////////////////
 
+//declarations
+// let isValidDeclaration = (tokenType) => {
+//     if()
+// }
+
+//class body
+
+let isValidClassBody = (tokenType) => {
+    if (isValidLeftCurlyBracket(tokenType)) {
+        if (isValidDeclaration(tokenType)) {
+            if(isValidRightCurlyBracket(tokenType)) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
-
-
+//class
+let isValidClass = (tokenType) => {
+    if (tokenType[pointer] === "class") {
+        pointer++;
+        if (isValidIdentifier(tokenType)) {
+            if (isValidClassBody(tokenType)) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
 
 
 
 let pointer = 0;
 let token, tokenType = scanner(text);
 let parser = (tokenType, symbolTable) => {
-    while(pointer < tokenType.length) {
-        switch(true) {
+    while (pointer < tokenType.length) {
+        switch (true) {
             //possible starting symbols
-            case(tokenType[pointer] === 'class'):
-                pointer++;
+            case (tokenType[pointer] === 'class'):
                 // console.log("before if", pointer);
-                if(isValidClass(tokenType, pointer)) {
+                if (isValidClass(tokenType, pointer)) {
                     pointer++;
                 }
                 continue;
