@@ -226,37 +226,47 @@ let isValidVoid = (tokenType) => {
 
 ////////////////////////////////////////////////////////////Complex Term////////////////////////////////////////////////////////////
 
+//statement
+let isValidStatement = (tokenType) => {
+    if (isValidAssignment(tokenType)) return true;
+    if (isValidProcedureCall(tokenType)) return true;
+    if (isValidIfStatement(tokenType)) return true;
+    if (isValidWhileStatement(tokenType)) return true;
+    if (isValidReturnStatement(tokenType)) return true;
+    return false;
+}
+
 //statement sequence
 
 let isValidStatementSequence = (tokenType) => {
-    if(isValidSequence(tokenType)) {
-        if(isValidSequence(tokenType)) {
+    if (isValidSequence(tokenType)) {
+        if (isValidSequence(tokenType)) {
             return true;
         }
         return true;
-    } 
+    }
     return false;
 }
 
 //method type
 
 let isValidMethodType = (tokenType) => {
-    if(isValidVoid(tokenType)) return true;
-    if(isValidInteger(tokenType)) return true;
+    if (isValidVoid(tokenType)) return true;
+    if (isValidInteger(tokenType)) return true;
     return false;
-    
+
 }
 
 //method body
 
 let isValidMethodBody = (tokenType) => {
-    if(isValidLeftCurlyBracket(tokenType)) {
-        if(isValidLocalDeclaration(tokenType)) {
-            if(isValidStatementSequence(tokenType)) {
+    if (isValidLeftCurlyBracket(tokenType)) {
+        if (isValidLocalDeclaration(tokenType)) {
+            if (isValidStatementSequence(tokenType)) {
                 return true;
             }
         }
-        if(isValidStatementSequence(tokenType)) {
+        if (isValidStatementSequence(tokenType)) {
             return true;
         }
     }
@@ -268,8 +278,8 @@ let isValidMethodBody = (tokenType) => {
 let isValidMethodHead = (tokenType) => {
     if (isValidPublic(tokenType)) {
         if (isValidMethodType(tokenType)) {
-            if(isValidIdentifier(tokenType)) {
-                if(isValidFormalParameters(tokenType)) {
+            if (isValidIdentifier(tokenType)) {
+                if (isValidFormalParameters(tokenType)) {
                     return true;
                 }
             }
