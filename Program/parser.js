@@ -226,6 +226,18 @@ let isValidVoid = (tokenType) => {
 
 ////////////////////////////////////////////////////////////Complex Term////////////////////////////////////////////////////////////
 
+
+//method declaration
+let isValidMethodDeclaration = (tokenType) => {
+    if (isValidMethodHead(tokenType)) {
+        if (isValidMethodBody(tokenType)) {
+            return true;
+        }
+    }
+        return false;
+}
+
+
 //declarations
 let isValidDeclaration = (tokenType) => {
     let validityFlag = false; //gets switch to true as soon as it enters at least one loop to see if its not an empty class!
@@ -255,7 +267,7 @@ let isValidDeclaration = (tokenType) => {
                     }
                 }
             case (tokenType[pointer] === "public"):
-                if (isValidMethodDeclaration (tokenType)) {
+                if (isValidMethodDeclaration(tokenType)) {
                     continue;
                 }
         }
