@@ -236,6 +236,22 @@ let isValidMethodType = (tokenType) => {
     
 }
 
+//method body
+
+let isValidMethodBody = (tokenType) => {
+    if(isValidLeftCurlyBracket(tokenType)) {
+        if(isValidLocalDeclaration(tokenType)) {
+            if(isValidStatementSequence(tokenType)) {
+                return true;
+            }
+        }
+        if(isValidStatementSequence(tokenType)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 //method head
 
 let isValidMethodHead = (tokenType) => {
