@@ -228,28 +228,18 @@ function isValidVoid(tokenType) {
 
 // if statement
 function isValidIfStatement(tokenType) {
-    if (isValidIf(tokenType)) {
-        if (isValidLeftParenthesis(tokenType)) {
-            if (isValidExpression(tokenType)) {
-                if (isValidRightParenthesis(tokenType)) {
-                    if (isValidLeftCurlyBracket(tokenType)) {
-                        if (isValidStatementSequence(tokenType)) {
-                            if (isValidRightCurlyBracket(tokenType)) {
-                                if (isValidElse(tokenType)) {
-                                    if (isValidLeftCurlyBracket(tokenType)) {
-                                        if (isValidStatementSequence(tokenType)) {
-                                            if (isValidRightCurlyBracket(tokenType)) {
-                                                return true;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+    if (isValidIf(tokenType)
+        && isValidLeftParenthesis(tokenType)
+        && isValidExpression(tokenType)
+        && isValidRightParenthesis(tokenType)
+        && isValidLeftCurlyBracket(tokenType)
+        && isValidStatementSequence(tokenType)
+        && isValidRightCurlyBracket(tokenType)
+        && isValidElse(tokenType)
+        && isValidLeftCurlyBracket(tokenType)
+        && isValidStatementSequence(tokenType)
+        && isValidRightCurlyBracket(tokenType)) {
+        return true;
     }
     return false;
 }
@@ -288,15 +278,13 @@ function isValidMethodType(tokenType) {
 //method body
 
 function isValidMethodBody(tokenType) {
-    if (isValidLeftCurlyBracket(tokenType)) {
-        if (isValidLocalDeclaration(tokenType)) {
-            if (isValidStatementSequence(tokenType)) {
-                return true;
-            }
-        }
-        if (isValidStatementSequence(tokenType)) {
-            return true;
-        }
+    if (isValidLeftCurlyBracket(tokenType)
+        && isValidLocalDeclaration(tokenType)
+        && isValidStatementSequence(tokenType)) {
+        return true;
+    }
+    if (isValidStatementSequence(tokenType)) {
+        return true;
     }
     return false;
 }
@@ -304,24 +292,20 @@ function isValidMethodBody(tokenType) {
 //method head
 
 function isValidMethodHead(tokenType) {
-    if (isValidPublic(tokenType)) {
-        if (isValidMethodType(tokenType)) {
-            if (isValidIdentifier(tokenType)) {
-                if (isValidFormalParameters(tokenType)) {
-                    return true;
-                }
-            }
-        }
+    if (isValidPublic(tokenType)
+        && isValidMethodType(tokenType)
+        && isValidIdentifier(tokenType)
+        && isValidFormalParameters(tokenType)) {
+        return true;
     }
     return false;
 }
 
 //method declaration
 function isValidMethodDeclaration(tokenType) {
-    if (isValidMethodHead(tokenType)) {
-        if (isValidMethodBody(tokenType)) {
-            return true;
-        }
+    if (isValidMethodHead(tokenType)
+        && isValidMethodBody(tokenType)) {
+        return true;
     }
     return false;
 }
@@ -334,26 +318,19 @@ function isValidDeclaration(tokenType) {
         validityFlag = true;
         switch (true) {
             case (tokenType[pointer] === "final"):
-                if (isValidFinal(tokenType)) {
-                    if (isValidInteger(tokenType)) {
-                        if (isValidIdentifier(tokenType)) {
-                            if (isValidEqual(TokenType)) {
-                                if (isValidExpression(TokenType)) {
-                                    if (isValidSemiColon(TokenType)) {
-                                        continue;
-                                    }
-                                }
-                            }
-                        }
-                    }
+                if (isValidFinal(tokenType)
+                    && isValidInteger(tokenType)
+                    && isValidIdentifier(tokenType)
+                    && isValidEqual(TokenType)
+                    && isValidExpression(TokenType)
+                    && isValidSemiColon(TokenType)) {
+                    continue;
                 }
             case (tokenType[pointer] === "int"):
-                if (isValidInteger(tokenType)) {
-                    if (isValidIdentifier(tokenType)) {
-                        if (isValidSemiColon(tokenType)) {
-                            continue;
-                        }
-                    }
+                if (isValidInteger(tokenType)
+                    && isValidIdentifier(tokenType)
+                    && isValidSemiColon(tokenType)) {
+                    continue;
                 }
             case (tokenType[pointer] === "public"):
                 if (isValidMethodDeclaration(tokenType)) {
@@ -367,12 +344,10 @@ function isValidDeclaration(tokenType) {
 //class body
 
 function isValidClassBody(tokenType) {
-    if (isValidLeftCurlyBracket(tokenType)) {
-        if (isValidDeclaration(tokenType)) {
-            if (isValidRightCurlyBracket(tokenType)) {
-                return true;
-            }
-        }
+    if (isValidLeftCurlyBracket(tokenType)
+        && isValidDeclaration(tokenType)
+        && isValidRightCurlyBracket(tokenType)) {
+        return true;
     }
     return false;
 }
@@ -381,10 +356,9 @@ function isValidClassBody(tokenType) {
 function isValidClass(tokenType) {
     if (tokenType[pointer] === "class") {
         pointer++;
-        if (isValidIdentifier(tokenType)) {
-            if (isValidClassBody(tokenType)) {
-                return true;
-            }
+        if (isValidIdentifier(tokenType)
+            && isValidClassBody(tokenType)) {
+            return true;
         }
     }
     return false;
