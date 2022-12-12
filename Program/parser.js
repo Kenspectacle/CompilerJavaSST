@@ -223,6 +223,15 @@ function isValidVoid(tokenType) {
     }
 }
 
+function isValidIf(tokenType) {
+    if (tokenType[pointer] === "if") {
+        pointer++;
+        return true;
+    } else {
+        return false;
+    }
+}
+
 
 ////////////////////////////////////////////////////////////Complex Term////////////////////////////////////////////////////////////
 
