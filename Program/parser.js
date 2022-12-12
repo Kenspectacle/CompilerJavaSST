@@ -282,6 +282,20 @@ function isValidAssignment(tokenType) {
     return false;
 }
 
+//expression
+function isValidExpression(tokenType) {
+    if (isValidSimpleExpression(tokenType)) {
+        //optional compared simple expressions
+        if(isValidLess(tokenType)
+            || isValidMore(tokenType)
+            && isValidSimpleExpression(tokenType)) {
+                return true;
+            }
+        return true;
+    }
+    return false;
+}
+
 //actual parameter
 function isValidActualParameters(tokenType) {
     if (isValidLeftParenthesis(tokenType)) {
