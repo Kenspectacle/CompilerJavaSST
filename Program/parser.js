@@ -279,6 +279,20 @@ function isValidIfStatement(tokenType) {
     return false;
 }
 
+//while statement
+function isValidWhileStatement(tokenType) {
+    if (isValidWhile(tokenType)
+        && isValidLeftParenthesis(tokenType)
+        && isValidExpression(tokenType)
+        && isValidRightParenthesis(tokenType)
+        && isValidLeftCurlyBracket(tokenType)
+        && isValidStatementSequence(tokenType)
+        && isValidRightCurlyBracket(tokenType)) {
+            return true;
+        }
+        return false;
+}
+
 //statement
 function isValidStatement(tokenType) {
     if (isValidAssignment(tokenType)) return true;
