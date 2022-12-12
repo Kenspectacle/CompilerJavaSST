@@ -293,6 +293,19 @@ function isValidWhileStatement(tokenType) {
         return false;
 }
 
+//return statement
+function isValidReturnStatement(tokenType) {
+    if (isValidReturn (tokenType)) {
+        if(isValidSimpleExpression(tokenType) && isValidSemiColon(tokenType)) {
+            return true;
+        } else if(isValidSemiColon(tokenType)) {
+            return true;
+        }
+        return false;
+    }
+    return false;
+}
+
 //statement
 function isValidStatement(tokenType) {
     if (isValidAssignment(tokenType)) return true;
