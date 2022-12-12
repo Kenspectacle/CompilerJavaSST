@@ -282,6 +282,17 @@ function isValidAssignment(tokenType) {
     return false;
 }
 
+//factor
+function isValidFactor(tokenType) {
+    if (isValidIdentifier(tokenType)
+        || isValidNumber(tokenType)
+        || (isValidLeftParenthesis(tokenType) && isValidExpression(tokenType) && isValidRightParenthesis(tokenType))
+        || isValidInternProcedureCall(tokenType)) {
+        return true;
+    }
+    return false;
+}
+
 //term
 function isValidTerm(tokenType) {
     if (isValidFactor(tokenType)) {
