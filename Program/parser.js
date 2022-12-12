@@ -270,6 +270,16 @@ function isValidReturn(tokenType) {
 }
 
 ////////////////////////////////////////////////////////////Complex Term////////////////////////////////////////////////////////////
+/*
+
+Logic Guidelines For Implementing EBNF:
+| = ||
+[Optional] = check both if with and without
+{repeating} = use while loop until its not true anymore
+Serial = use && boolean logic, will shortcircuit at the part where it is wrong
+
+*/
+
 
 //assignment
 function isValidAssignment(tokenType) {
