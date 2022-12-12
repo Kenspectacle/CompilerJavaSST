@@ -282,16 +282,32 @@ function isValidAssignment(tokenType) {
     return false;
 }
 
+//term
+function isValidTerm(tokenType) {
+    if (isValidFactor(tokenType)) {
+        //optional additional factors
+        while (tokenType[pointer] === "*" || tokenType[pointer] === "/") {
+            if (isValidTimes(tokenType)
+                || isValidDivision(tokenType)
+                && isValidFactor(tokenType)) {
+                return true;
+            }
+            return false;
+        }
+    }
+    return false;
+}
+
 //simple expression
 function isValidSimpleExpression(tokenType) {
     if (isValidTerm(tokenType)) {
         //optional repeating additional terms
-        while(tokenType[pointer] === "+" || tokenType[pointer] === "-") {
-            if(isValidPlus(tokenType)
+        while (tokenType[pointer] === "+" || tokenType[pointer] === "-") {
+            if (isValidPlus(tokenType)
                 || isValidMinus(tokenType)
-                && isValidTerm(tokenType)){
-                    return true;
-                }
+                && isValidTerm(tokenType)) {
+                return true;
+            }
             return false; //only a plus/minus at the end with no additional term, false
         }
         return true;
@@ -303,11 +319,11 @@ function isValidSimpleExpression(tokenType) {
 function isValidExpression(tokenType) {
     if (isValidSimpleExpression(tokenType)) {
         //optional compared simple expressions
-        if(isValidLess(tokenType)
+        if (isValidLess(tokenType)
             || isValidMore(tokenType)
             && isValidSimpleExpression(tokenType)) {
-                return true;
-            }
+            return true;
+        }
         return true;
     }
     return false;
@@ -318,14 +334,14 @@ function isValidActualParameters(tokenType) {
     if (isValidLeftParenthesis(tokenType)) {
         //optional expression
         if (isValidExpression(tokenType)) {
-            while(tokenType[pointer] === ",") {
-                if(isValidComma(tokenType)
+            while (tokenType[pointer] === ",") {
+                if (isValidComma(tokenType)
                     && isValidExpression(tokenType)) {
-                        return true;
-                    }
+                    return true;
+                }
             }
         }
-        if(isValidRightParenthesis(tokenType)) {
+        if (isValidRightParenthesis(tokenType)) {
             return true;
         }
     }
