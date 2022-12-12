@@ -261,6 +261,17 @@ function isValidReturn(tokenType) {
 
 ////////////////////////////////////////////////////////////Complex Term////////////////////////////////////////////////////////////
 
+//assignment
+function isValidAssignment(tokenType) {
+    if (isValidIdentifier(tokenType)
+        && isValidEqual(tokenType)
+        && isValidExpression(tokenType)
+        && isValidSemiColon(tokenType)) {
+        return true;
+    }
+    return false;
+}
+
 // if statement
 function isValidIfStatement(tokenType) {
     if (isValidIf(tokenType)
@@ -288,17 +299,17 @@ function isValidWhileStatement(tokenType) {
         && isValidLeftCurlyBracket(tokenType)
         && isValidStatementSequence(tokenType)
         && isValidRightCurlyBracket(tokenType)) {
-            return true;
-        }
-        return false;
+        return true;
+    }
+    return false;
 }
 
 //return statement
 function isValidReturnStatement(tokenType) {
-    if (isValidReturn (tokenType)) {
-        if(isValidSimpleExpression(tokenType) && isValidSemiColon(tokenType)) {
+    if (isValidReturn(tokenType)) {
+        if (isValidSimpleExpression(tokenType) && isValidSemiColon(tokenType)) {
             return true;
-        } else if(isValidSemiColon(tokenType)) {
+        } else if (isValidSemiColon(tokenType)) {
             return true;
         }
         return false;
