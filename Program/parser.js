@@ -282,6 +282,23 @@ function isValidAssignment(tokenType) {
     return false;
 }
 
+//simple expression
+function isValidSimpleExpression(tokenType) {
+    if (isValidTerm(tokenType)) {
+        //optional repeating additional terms
+        while(tokenType[pointer] === "+" || tokenType[pointer] === "-") {
+            if(isValidPlus(tokenType)
+                || isValidMinus(tokenType)
+                && isValidTerm(tokenType)){
+                    return true;
+                }
+            return false; //only a plus/minus at the end with no additional term, false
+        }
+        return true;
+    }
+    return false;
+}
+
 //expression
 function isValidExpression(tokenType) {
     if (isValidSimpleExpression(tokenType)) {
