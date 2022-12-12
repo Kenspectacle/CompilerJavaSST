@@ -232,6 +232,14 @@ function isValidIf(tokenType) {
     }
 }
 
+function isValidElse(tokenType) {
+    if (tokenType[pointer] === "else") {
+        pointer++;
+        return true;
+    } else {
+        return false;
+    }
+}
 
 ////////////////////////////////////////////////////////////Complex Term////////////////////////////////////////////////////////////
 
