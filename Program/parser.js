@@ -272,6 +272,14 @@ function isValidAssignment(tokenType) {
     return false;
 }
 
+//intern procedure call
+function isValidInternProcedureCall(tokenType) {
+    if (isValidIdentifier && isValidActualParameter) {
+        return true;
+    }
+    return false;
+}
+
 //procedure call
 function isValidProcedureCall(tokenType) {
     if(isValidInternProcedureCall(tokenType)
