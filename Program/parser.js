@@ -272,9 +272,28 @@ function isValidAssignment(tokenType) {
     return false;
 }
 
+//actual parameter
+function isValidActualParameters(tokenType) {
+    if (isValidLeftParenthesis(tokenType)) {
+        //optional expression
+        if (isValidExpression(tokenType)) {
+            while(tokenType[pointer] === ",") {
+                if(isValidComma(tokenType)
+                    && isValidExpression(tokenType)) {
+                        return true;
+                    }
+            }
+        }
+        if(isValidRightParenthesis(tokenType)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 //intern procedure call
 function isValidInternProcedureCall(tokenType) {
-    if (isValidIdentifier && isValidActualParameter) {
+    if (isValidIdentifier(tokenType) && isValidActualParameters(tokenType)) {
         return true;
     }
     return false;
@@ -282,10 +301,10 @@ function isValidInternProcedureCall(tokenType) {
 
 //procedure call
 function isValidProcedureCall(tokenType) {
-    if(isValidInternProcedureCall(tokenType)
+    if (isValidInternProcedureCall(tokenType)
         && isValidSemiColon(tokenType)) {
-            return true;
-        }
+        return true;
+    }
     return false;
 }
 
