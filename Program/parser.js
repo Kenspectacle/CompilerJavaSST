@@ -272,6 +272,15 @@ function isValidAssignment(tokenType) {
     return false;
 }
 
+//procedure call
+function isValidProcedureCall(tokenType) {
+    if(isValidInternProcedureCall(tokenType)
+        && isValidSemiColon(tokenType)) {
+            return true;
+        }
+    return false;
+}
+
 // if statement
 function isValidIfStatement(tokenType) {
     if (isValidIf(tokenType)
