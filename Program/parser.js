@@ -241,6 +241,24 @@ function isValidElse(tokenType) {
     }
 }
 
+function isValidWhile(tokenType) {
+    if (tokenType[pointer] === "while") {
+        pointer++;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function isValidReturn(tokenType) {
+    if (tokenType[pointer] === "return") {
+        pointer++;
+        return true;
+    } else {
+        return false;
+    }
+}
+
 ////////////////////////////////////////////////////////////Complex Term////////////////////////////////////////////////////////////
 
 // if statement
