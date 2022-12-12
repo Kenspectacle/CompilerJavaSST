@@ -545,7 +545,7 @@ function isValidClass(tokenType) {
 
 let pointer = 0;
 let token, tokenType = scanner(text);
-let parser = (tokenType, symbolTable) => {
+function parser (tokenType, symbolTable) {
     while (pointer < tokenType.length) {
         switch (true) {
             //possible starting symbols
