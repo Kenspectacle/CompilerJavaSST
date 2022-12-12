@@ -59,6 +59,16 @@ function isValidSemiColon(tokenType) {
     }
 }
 
+//comma
+function isValidComma(tokenType) {
+    if (tokenType[pointer] === ",") {
+        pointer++;
+        return true;
+    } else {
+        return false;
+    }
+}
+
 ////////////////////////////////////////////////////////////Comparison////////////////////////////////////////////////////////////
 
 function isValidLess(tokenType) {
