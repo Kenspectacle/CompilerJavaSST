@@ -14,7 +14,8 @@ To Do List
 
 const fs = require('fs') //read file
 
-let text = fs.readFileSync('./input.txt').toString()
+const path = require('path');
+let text = fs.readFileSync(path.resolve(__dirname, "./input.txt")).toString();
 
 console.log(text);
 
@@ -187,7 +188,9 @@ let scanner = (text) => {
 }
 
 module.exports = scanner;
-
+token, tokenType = scanner(text);
+console.log(token);
+console.log(tokenType);
 
 
 
