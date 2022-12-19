@@ -207,7 +207,7 @@ function isValidInteger(tokenType) {
 ////////////////////////////////////////////////////////////Special Keywords////////////////////////////////////////////////////////////
 
 function isValidFinal(tokenType) {
-    if (tokenType[pointer] === "Final") {
+    if (tokenType[pointer] === "final") {
         pointer++;
         return true;
     } else {
@@ -501,25 +501,32 @@ function isValidMethodDeclaration(tokenType) {
 //declarations
 function isValidDeclaration(tokenType) {
     let validityFlag = false; //gets switch to true as soon as it enters at least one loop to see if its not an empty class!
+    console.log('kg1');
+    console.log(pointer);
+    console.log(tokenType[pointer]);
+    console.log(tokenType[pointer] === "final");
     while (tokenType[pointer] === "final" || tokenType[pointer] === "int" || tokenType[pointer] === "public") {
         validityFlag = true;
-        switch (true) {
-            case (tokenType[pointer] === "final"):
+        console.log('kg2')
+        switch (tokenType[pointer]) {
+            case ("final"):
+                console.log('kg3')
                 if (isValidFinal(tokenType)
                     && isValidInteger(tokenType)
                     && isValidIdentifier(tokenType)
                     && isValidEqual(TokenType)
                     && isValidExpression(TokenType)
                     && isValidSemiColon(TokenType)) {
+                    console.log('kg4')
                     continue;
                 }
-            case (tokenType[pointer] === "int"):
+            case ("int"):
                 if (isValidInteger(tokenType)
                     && isValidIdentifier(tokenType)
                     && isValidSemiColon(tokenType)) {
                     continue;
                 }
-            case (tokenType[pointer] === "public"):
+            case ("public"):
                 if (isValidMethodDeclaration(tokenType)) {
                     continue;
                 }
@@ -555,7 +562,7 @@ function isValidClass(tokenType) {
 
 let pointer = 0;
 let token, tokenType = scanner(text);
-function parser (tokenType, symbolTable) {
+function parser(tokenType, symbolTable) {
     while (pointer < tokenType.length) {
         switch (true) {
             //possible starting symbols
