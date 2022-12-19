@@ -127,6 +127,14 @@ function isValidDivision(tokenType) {
     }
 }
 
+function isValidEqual(tokenType) {
+    if (tokenType[pointer] === "=") {
+        pointer++;
+        return true;
+    } else {
+        return false;
+    }
+}
 ////////////////////////////////////////////////////////////Curly Brackets////////////////////////////////////////////////////////////
 
 //left curly bracket
@@ -514,9 +522,9 @@ function isValidDeclaration(tokenType) {
                 if (isValidFinal(tokenType)
                     && isValidInteger(tokenType)
                     && isValidIdentifier(tokenType)
-                    && isValidEqual(TokenType)
-                    && isValidExpression(TokenType)
-                    && isValidSemiColon(TokenType)) {
+                    && isValidEqual(tokenType)
+                    && isValidExpression(tokenType)
+                    && isValidSemiColon(tokenType)) {
                     console.log('kg4')
                     continue;
                 }
