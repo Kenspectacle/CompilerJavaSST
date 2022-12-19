@@ -313,7 +313,9 @@ function isValidFactor(tokenType) {
 
 //term
 function isValidTerm(tokenType) {
+    console.log('kg9')
     if (isValidFactor(tokenType)) {
+        console.log('kg10')
         //optional additional factors
         while (tokenType[pointer] === "*" || tokenType[pointer] === "/") {
             if (isValidTimes(tokenType)
@@ -323,13 +325,16 @@ function isValidTerm(tokenType) {
             }
             return false;
         }
+        return true;
     }
     return false;
 }
 
 //simple expression
 function isValidSimpleExpression(tokenType) {
+    console.log('kg7')
     if (isValidTerm(tokenType)) {
+        console.log('kg8')
         //optional repeating additional terms
         while (tokenType[pointer] === "+" || tokenType[pointer] === "-") {
             if (isValidPlus(tokenType)
@@ -346,8 +351,10 @@ function isValidSimpleExpression(tokenType) {
 
 //expression
 function isValidExpression(tokenType) {
+    console.log('kg5')
     if (isValidSimpleExpression(tokenType)) {
         //optional compared simple expressions
+        console.log('kg6')
         if (isValidLess(tokenType)
             || isValidMore(tokenType)
             && isValidSimpleExpression(tokenType)) {
@@ -519,13 +526,19 @@ function isValidDeclaration(tokenType) {
         switch (tokenType[pointer]) {
             case ("final"):
                 console.log('kg3')
+                console.log(isValidFinal(tokenType)
+                && isValidInteger(tokenType)
+                && isValidIdentifier(tokenType)
+                && isValidEqual(tokenType)
+                && isValidExpression(tokenType))
                 if (isValidFinal(tokenType)
                     && isValidInteger(tokenType)
                     && isValidIdentifier(tokenType)
                     && isValidEqual(tokenType)
                     && isValidExpression(tokenType)
                     && isValidSemiColon(tokenType)) {
-                    console.log('kg4')
+                    console.log('kg4');
+                    console.log(pointer);
                     continue;
                 }
             case ("int"):
@@ -581,8 +594,8 @@ function parser(tokenType, symbolTable) {
                 }
                 continue;
         }
-        console.log('test');
-        console.log(pointer);
+        // console.log('test');
+        // console.log(pointer);
     }
 }
 
