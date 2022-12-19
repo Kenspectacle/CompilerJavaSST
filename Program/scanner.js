@@ -189,8 +189,6 @@ let scanner = (text) => {
 
 module.exports = scanner;
 token, tokenType = scanner(text);
-console.log(token);
-console.log(tokenType);
 
 
 
