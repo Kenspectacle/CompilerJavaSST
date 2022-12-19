@@ -13,6 +13,7 @@ for loop
 
 */
 
+const { Console } = require('console');
 const fs = require('fs') //read file
 const path = require('path');
 const scanner = require(path.resolve(__dirname, "./scanner.js")); // scanner
@@ -313,9 +314,7 @@ function isValidFactor(tokenType) {
 
 //term
 function isValidTerm(tokenType) {
-    console.log('kg9')
     if (isValidFactor(tokenType)) {
-        console.log('kg10')
         //optional additional factors
         while (tokenType[pointer] === "*" || tokenType[pointer] === "/") {
             if (isValidTimes(tokenType)
@@ -332,9 +331,7 @@ function isValidTerm(tokenType) {
 
 //simple expression
 function isValidSimpleExpression(tokenType) {
-    console.log('kg7')
     if (isValidTerm(tokenType)) {
-        console.log('kg8')
         //optional repeating additional terms
         while (tokenType[pointer] === "+" || tokenType[pointer] === "-") {
             if (isValidPlus(tokenType)
@@ -351,10 +348,8 @@ function isValidSimpleExpression(tokenType) {
 
 //expression
 function isValidExpression(tokenType) {
-    console.log('kg5')
     if (isValidSimpleExpression(tokenType)) {
         //optional compared simple expressions
-        console.log('kg6')
         if (isValidLess(tokenType)
             || isValidMore(tokenType)
             && isValidSimpleExpression(tokenType)) {
@@ -516,21 +511,15 @@ function isValidMethodDeclaration(tokenType) {
 //declarations
 function isValidDeclaration(tokenType) {
     let validityFlag = false; //gets switch to true as soon as it enters at least one loop to see if its not an empty class!
-    console.log('kg1');
     console.log(pointer);
-    console.log(tokenType[pointer]);
-    console.log(tokenType[pointer] === "final");
+    console.log(tokenType);
     while (tokenType[pointer] === "final" || tokenType[pointer] === "int" || tokenType[pointer] === "public") {
         validityFlag = true;
         console.log('kg2')
+        console.log('tokentypesssss', tokenType[pointer])
         switch (tokenType[pointer]) {
             case ("final"):
                 console.log('kg3')
-                console.log(isValidFinal(tokenType)
-                && isValidInteger(tokenType)
-                && isValidIdentifier(tokenType)
-                && isValidEqual(tokenType)
-                && isValidExpression(tokenType))
                 if (isValidFinal(tokenType)
                     && isValidInteger(tokenType)
                     && isValidIdentifier(tokenType)
@@ -542,9 +531,11 @@ function isValidDeclaration(tokenType) {
                     continue;
                 }
             case ("int"):
+                console.log('kg5')
                 if (isValidInteger(tokenType)
                     && isValidIdentifier(tokenType)
                     && isValidSemiColon(tokenType)) {
+                    console.log(pointer)
                     continue;
                 }
             case ("public"):
