@@ -13,7 +13,6 @@ for loop
 
 */
 
-const { Console } = require('console');
 const fs = require('fs') //read file
 const path = require('path');
 const scanner = require(path.resolve(__dirname, "./scanner.js")); // scanner
@@ -289,6 +288,26 @@ Serial = use && boolean logic, will shortcircuit at the part where it is wrong
 
 */
 
+
+//formal parameters
+function isValidFormalParameters(tokenType) {
+    if (isValidLeftParenthesis) {
+        if (isValidFormalParametersSection(tokenType)) {
+            //optional additional valid formal parameters
+            while (tokenType[pointer] === ",") {
+                if (isValidComma(tokenType)
+                    && isValidFormalParametersSection(tokenType)) {
+                    if (isValidRightParenthesis(tokenType)) { //check ending bracket
+                        return true;
+                    }
+                }
+            }
+            if (isValidRightParenthesis(tokenType)) {
+                return true;
+            }
+        }
+    }
+}
 
 //assignment
 function isValidAssignment(tokenType) {
