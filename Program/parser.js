@@ -288,23 +288,42 @@ Serial = use && boolean logic, will shortcircuit at the part where it is wrong
 
 */
 
+//formal parameters section
+function isValidFormalParametersSection(tokenType) {
+    if (isValidInteger(tokenType)
+        && isValidIdentifier(tokenType)) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 //formal parameters
 function isValidFormalParameters(tokenType) {
-    if (isValidLeftParenthesis) {
+    console.log('kg13')
+    console.log('pointerkg13', pointer)
+    if (isValidLeftParenthesis(tokenType)) {
+        console.log('kg14')
+        console.log('pointerkg14', pointer)
         if (isValidFormalParametersSection(tokenType)) {
             //optional additional valid formal parameters
             while (tokenType[pointer] === ",") {
                 if (isValidComma(tokenType)
                     && isValidFormalParametersSection(tokenType)) {
                     if (isValidRightParenthesis(tokenType)) { //check ending bracket
+                        console.log('kg15')
                         return true;
                     }
                 }
+                //not valid formal parameters
+                console.log(kg)
+                return false;
+                
             }
-            if (isValidRightParenthesis(tokenType)) {
-                return true;
-            }
+
+        }
+        if (isValidRightParenthesis(tokenType)) {
+            return true;
         }
     }
 }
@@ -508,10 +527,13 @@ function isValidMethodBody(tokenType) {
 //method head
 
 function isValidMethodHead(tokenType) {
+    console.log('kg11');
+    console.log('pointer:',pointer);
     if (isValidPublic(tokenType)
         && isValidMethodType(tokenType)
         && isValidIdentifier(tokenType)
         && isValidFormalParameters(tokenType)) {
+        console.log('kg12');
         return true;
     }
     return false;
@@ -519,8 +541,11 @@ function isValidMethodHead(tokenType) {
 
 //method declaration
 function isValidMethodDeclaration(tokenType) {
+    console.log('kg10');
+    console.log('pointerkg10:', pointer);
     if (isValidMethodHead(tokenType)
         && isValidMethodBody(tokenType)) {
+        console.log('kg12');
         return true;
     }
     return false;
@@ -594,6 +619,8 @@ function isValidClass(tokenType) {
 let pointer = 0;
 let token, tokenType = scanner(text);
 function parser(tokenType, symbolTable) {
+    console.log('pointer:' , pointer);
+    console.log('tokentype.length', tokenType.length);
     while (pointer < tokenType.length) {
         switch (true) {
             //possible starting symbols
