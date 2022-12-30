@@ -288,6 +288,17 @@ Serial = use && boolean logic, will shortcircuit at the part where it is wrong
 
 */
 
+//local declaration
+
+function isValidLocalDeclaration(tokenType) {
+    if(isValidInteger(tokenType)
+        && isValidIdentifier(tokenType)
+        && isValidSemiColon(tokenType)) {
+            return true;
+        }
+    return false;
+}
+
 //formal parameters section
 function isValidFormalParametersSection(tokenType) {
     if (isValidInteger(tokenType)
