@@ -79,6 +79,45 @@ let scanner = (text) => {
             case start === "\t":
                 text = text.slice(1);
                 break;
+            //comparison or equal
+            case start === "<" || start === "=" || start ===">":
+                if(text[0] + text[1] === "<=") {
+                    //less than equal
+                    token.push('<=');
+                    tokenType.push('<=');
+                    text = text.slice(2);
+                    break;
+                } else if(text[0] + text[1] === ">=") {
+                    //more than equal
+                    token.push('>=');
+                    tokenType.push('>=');
+                    text = text.slice(2);
+                    break;
+                } else if(text[0] + text[1] === "==") {
+                    //equal equal
+                    token.push('==');
+                    tokenType.push('==');
+                    text = text.slice(2);
+                    break;
+                } else if(text[0] === "=" && (text[1] === undefined || text[1] === " ")) {
+                    //single equal
+                    token.push('=');
+                    tokenType.push('=');
+                    text = text.slice(1);
+                    break;
+                } else if(text[0] === "<" && (text[1] === undefined || text[1] === " ")) {
+                    //less than
+                    token.push('<');
+                    tokenType.push('<');
+                    text = text.slice(1);
+                    break;
+                } else if(text[0] === ">" && (text[1] === undefined || text[1] === " ")) {
+                    //more than
+                    token.push('>');
+                    tokenType.push('>');
+                    text = text.slice(1);
+                    break;
+                }
             //numbers
             case /^[0-9]/.test(start):
                 sym.set('int', sym.get('int') + 1) //increment number by 1
