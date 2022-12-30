@@ -9,6 +9,7 @@ class, public, void, if, int, final, return, else
 To Do List
 -Refactor the code
 -Implement ignore feature for comments
+-Add keywords entry for the special keyword
 */
 
 
@@ -49,7 +50,7 @@ sym.set('variable', 0);
 sym.set('int', 0);
 
 //single symbol list
-let singleSymbols = ['(', ')', '+', '*', '{', '}', '[', ']', '=', ';', '<', '>', '-', ',', '/'];
+let singleSymbols = ['(', ')', '+', '*', '{', '}', '[', ']', ';', '-', ',', '/'];
 
 //iterate through the text
 let scanner = (text) => {
@@ -189,7 +190,7 @@ let scanner = (text) => {
 
 module.exports = scanner;
 token, tokenType = scanner(text);
-
+console.log(token, tokenType);
 
 
 
