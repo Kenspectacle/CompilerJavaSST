@@ -198,7 +198,7 @@ let scanner = (text) => {
                             break;
                         }
                     case ('r'):
-                        if (text[1] + text[2] + text[3] + text[4] + text[5] === "eturn" && (text[6] === undefined || text[6] === " ")) {
+                        if (text[1] + text[2] + text[3] + text[4] + text[5] === "eturn" && (text[6] === undefined || text[6] === " " || text[6] === ";")) {
                             token.push('return');
                             tokenType.push('return');
                             text = text.slice(6);
