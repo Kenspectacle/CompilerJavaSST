@@ -291,11 +291,11 @@ Serial = use && boolean logic, will shortcircuit at the part where it is wrong
 //local declaration
 
 function isValidLocalDeclaration(tokenType) {
-    if(isValidInteger(tokenType)
+    if (isValidInteger(tokenType)
         && isValidIdentifier(tokenType)
         && isValidSemiColon(tokenType)) {
-            return true;
-        }
+        return true;
+    }
     return false;
 }
 
@@ -329,7 +329,7 @@ function isValidFormalParameters(tokenType) {
                 //not valid formal parameters
                 console.log(kg)
                 return false;
-                
+
             }
 
         }
@@ -524,13 +524,20 @@ function isValidMethodType(tokenType) {
 //method body
 
 function isValidMethodBody(tokenType) {
-    if (isValidLeftCurlyBracket(tokenType)
-        && isValidLocalDeclaration(tokenType)
-        && isValidStatementSequence(tokenType)) {
-        return true;
-    }
-    if (isValidStatementSequence(tokenType)) {
-        return true;
+    if (isValidLeftCurlyBracket(tokenType)){
+        while (tokenType[pointer] === "int") {
+            if (isValidLocalDeclaration(tokenType)) {
+                console.log('kg20')
+                console.log('pointerkg20:', pointer)
+                continue; //check for local declaration, and then repeat the if to continue the pointer
+            }
+        }
+         //breaks as soon as there are no longer any local declarations
+        if (isValidStatementSequence(tokenType)
+            && isValidRightCurlyBracket(tokenType)) {
+                return true;
+            }
+        return false;
     }
     return false;
 }
@@ -539,7 +546,7 @@ function isValidMethodBody(tokenType) {
 
 function isValidMethodHead(tokenType) {
     console.log('kg11');
-    console.log('pointer:',pointer);
+    console.log('pointer:', pointer);
     if (isValidPublic(tokenType)
         && isValidMethodType(tokenType)
         && isValidIdentifier(tokenType)
@@ -630,7 +637,7 @@ function isValidClass(tokenType) {
 let pointer = 0;
 let token, tokenType = scanner(text);
 function parser(tokenType, symbolTable) {
-    console.log('pointer:' , pointer);
+    console.log('pointer:', pointer);
     console.log('tokentype.length', tokenType.length);
     while (pointer < tokenType.length) {
         switch (true) {
