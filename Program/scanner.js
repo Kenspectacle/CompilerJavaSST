@@ -190,6 +190,7 @@ let scanner = (text) => {
                             break;
                         }
                     case ('f'):
+                        //final keyword
                         if (text[1] + text[2] + text[3] + text[4] === "inal" && (text[5] === undefined || text[5] === " ")) {
                             token.push('final');
                             tokenType.push('final');
@@ -204,10 +205,19 @@ let scanner = (text) => {
                             break;
                         }
                     case ('e'):
+                        //else keyword
                         if (text[1] + text[2] + text[3] === "lse" && (text[4] === undefined || text[4] === " ")) {
                             token.push('else');
                             tokenType.push('else');
                             text = text.slice(4);
+                            break;
+                        }
+                    case ('w'):
+                        //while keyword
+                        if (text[1] + text[2] + text[3] + text[4] === "hile" && (text[5] === undefined || text[5] === " " || text[5]) === "(") {
+                            token.push('while');
+                            tokenType.push('while');
+                            text = text.slice(5);
                             break;
                         }
                     default:
@@ -229,7 +239,8 @@ let scanner = (text) => {
 
 module.exports = scanner;
 token, tokenType = scanner(text);
-console.log(token, tokenType);
+console.dir(token, {'maxArrayLength': null});
+console.dir(tokenType, {'maxArrayLength': null});
 
 
 
