@@ -89,6 +89,33 @@ function isValidMore(tokenType) {
     }
 }
 
+function isValidLessEqual(tokenType) {
+    if (tokenType[pointer] === "<=") {
+        pointer++;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function isValidEqualEqual(tokenType) {
+    if (tokenType[pointer] === "==") {
+        pointer++;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function isValidMoreEqual(tokenType) {
+    if (tokenType[pointer] === ">=") {
+        pointer++;
+        return true;
+    } else {
+        return false;
+    }
+}
+
 ////////////////////////////////////////////////////////////Arithmetic Expressions////////////////////////////////////////////////////////////
 
 function isValidPlus(tokenType) {
