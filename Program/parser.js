@@ -410,8 +410,8 @@ function isValidSimpleExpression(tokenType) {
     if (isValidTerm(tokenType)) {
         //optional repeating additional terms
         while (tokenType[pointer] === "+" || tokenType[pointer] === "-") {
-            if (isValidPlus(tokenType)
-                || isValidMinus(tokenType)
+            if ((isValidPlus(tokenType)
+                || isValidMinus(tokenType))
                 && isValidTerm(tokenType)) {
                 return true;
             }
@@ -426,8 +426,11 @@ function isValidSimpleExpression(tokenType) {
 function isValidExpression(tokenType) {
     if (isValidSimpleExpression(tokenType)) {
         //optional compared simple expressions
-        if (isValidLess(tokenType)
+        if ((isValidLess(tokenType)
             || isValidMore(tokenType)
+            || isValidEqualEqual(tokenType)
+            || isValidMoreEqual(tokenType)
+            || isValidLessEqual(tokenType))
             && isValidSimpleExpression(tokenType)) {
             return true;
         }
