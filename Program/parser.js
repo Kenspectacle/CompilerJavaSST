@@ -492,7 +492,12 @@ function isValidReturnStatement(tokenType) {
 
 //statement
 function isValidStatement(tokenType) {
-    if (isValidAssignment(tokenType)) return true;
+    let tempPointer = pointer;
+    if (isValidAssignment(tokenType)) {
+        return true;
+    } else {
+        pointer = tempPointer;
+    }
     if (isValidProcedureCall(tokenType)) return true;
     if (isValidIfStatement(tokenType)) return true;
     if (isValidWhileStatement(tokenType)) return true;
@@ -504,8 +509,15 @@ function isValidStatement(tokenType) {
 
 function isValidStatementSequence(tokenType) {
     if (isValidStatement(tokenType)) {
-        if (isValidStatement(tokenType)) {
-            return true;
+        while (tokenType[pointer] === "identifier" //check for Assignment and Procedure Call
+            || tokenType[pointer] === "if" //check for if
+            || tokenType[pointer] === "while" //check for while
+            || tokenType[pointer] === "return" // check for return
+        ) {
+            if (isValidStatement(tokenType)) {
+                console.log('kg30')
+                continue;
+            }
         }
         return true;
     }
@@ -524,7 +536,7 @@ function isValidMethodType(tokenType) {
 //method body
 
 function isValidMethodBody(tokenType) {
-    if (isValidLeftCurlyBracket(tokenType)){
+    if (isValidLeftCurlyBracket(tokenType)) {
         while (tokenType[pointer] === "int") {
             if (isValidLocalDeclaration(tokenType)) {
                 console.log('kg20')
@@ -532,11 +544,11 @@ function isValidMethodBody(tokenType) {
                 continue; //check for local declaration, and then repeat the if to continue the pointer
             }
         }
-         //breaks as soon as there are no longer any local declarations
+        //breaks as soon as there are no longer any local declarations
         if (isValidStatementSequence(tokenType)
             && isValidRightCurlyBracket(tokenType)) {
-                return true;
-            }
+            return true;
+        }
         return false;
     }
     return false;
