@@ -409,8 +409,8 @@ function isValidTerm(tokenType) {
     if (isValidFactor(tokenType)) {
         //optional additional factors
         while (tokenType[pointer] === "*" || tokenType[pointer] === "/") {
-            if (isValidTimes(tokenType)
-                || isValidDivision(tokenType)
+            if ((isValidTimes(tokenType)
+                || isValidDivision(tokenType))
                 && isValidFactor(tokenType)) {
                 return true;
             }
