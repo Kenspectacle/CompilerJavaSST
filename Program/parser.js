@@ -462,7 +462,8 @@ function isValidActualParameters(tokenType) {
         if (isValidExpression(tokenType)) {
             while (tokenType[pointer] === ",") {
                 if (isValidComma(tokenType)
-                    && isValidExpression(tokenType)) {
+                    && isValidExpression(tokenType)
+                    && isValidRightParenthesis(tokenType)) {
                     return true;
                 }
             }
@@ -470,6 +471,7 @@ function isValidActualParameters(tokenType) {
         if (isValidRightParenthesis(tokenType)) {
             return true;
         }
+        return false;
     }
     return false;
 }
