@@ -379,11 +379,27 @@ function isValidAssignment(tokenType) {
 
 //factor
 function isValidFactor(tokenType) {
-    if (isValidIdentifier(tokenType)
-        || isValidNumber(tokenType)
-        || (isValidLeftParenthesis(tokenType) && isValidExpression(tokenType) && isValidRightParenthesis(tokenType))
-        || isValidInternProcedureCall(tokenType)) {
+    let tempPointer = pointer;
+    //lots of OR statement in the EBNF
+    if (isValidLeftParenthesis(tokenType) && isValidExpression(tokenType) && isValidRightParenthesis(tokenType)){
         return true;
+    } else {
+        pointer = tempPointer;
+    }
+    if(isValidInternProcedureCall(tokenType)) { //check for intern procedure call first, since identifier is a subset of it
+        return true;
+    } else {
+        pointer = tempPointer;
+    }
+    if(isValidNumber(tokenType)) {
+        return true;
+    } else {
+        pointer = tempPointer;
+    }
+    if(isValidIdentifier(tokenType)) {
+        return true;
+    } else {
+        pointer = tempPointer;
     }
     return false;
 }
