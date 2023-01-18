@@ -13,6 +13,9 @@ for loop
 
 */
 
+//Class Imports
+const {LinkedList} = require('./linkedlist.cjs');
+
 const fs = require('fs') //read file
 const path = require('path');
 const scanner = require(path.resolve(__dirname, "./scanner.js")); // scanner
@@ -381,22 +384,22 @@ function isValidAssignment(tokenType) {
 function isValidFactor(tokenType) {
     let tempPointer = pointer;
     //lots of OR statement in the EBNF
-    if (isValidLeftParenthesis(tokenType) && isValidExpression(tokenType) && isValidRightParenthesis(tokenType)){
+    if (isValidLeftParenthesis(tokenType) && isValidExpression(tokenType) && isValidRightParenthesis(tokenType)) {
         return true;
     } else {
         pointer = tempPointer;
     }
-    if(isValidInternProcedureCall(tokenType)) { //check for intern procedure call first, since identifier is a subset of it
+    if (isValidInternProcedureCall(tokenType)) { //check for intern procedure call first, since identifier is a subset of it
         return true;
     } else {
         pointer = tempPointer;
     }
-    if(isValidNumber(tokenType)) {
+    if (isValidNumber(tokenType)) {
         return true;
     } else {
         pointer = tempPointer;
     }
-    if(isValidIdentifier(tokenType)) {
+    if (isValidIdentifier(tokenType)) {
         return true;
     } else {
         pointer = tempPointer;
@@ -696,6 +699,7 @@ function isValidClass(tokenType) {
 
 let pointer = 0;
 let token, tokenType = scanner(text);
+
 function parser(tokenType, symbolTable) {
     console.log('pointer:', pointer);
     console.log('tokentype.length', tokenType.length);
@@ -713,6 +717,20 @@ function parser(tokenType, symbolTable) {
         // console.log(pointer);
     }
 }
+
+const ll = new LinkedList();
+
+ll.insertFirst(100);
+ll.insertFirst(200);
+ll.insertFirst(300);
+ll.insertLast(400);
+
+ll.insertAt(500, 2);
+// ll.getAt(2);
+ll.removeAt(3)
+
+
+ll.printListData();
 
 // console.log(tokenType, "tokentype");
 parser(tokenType, symbolTable);

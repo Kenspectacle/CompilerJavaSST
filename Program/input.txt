@@ -1,8 +1,8 @@
 
 class Test {
+	final int elseif = 0;
 	final int var1 = 0;
 	final int var2 = 2;
-	final int var3 = 127;
 	final int var4 = 3;
 	final int var5 = 100;
 	
