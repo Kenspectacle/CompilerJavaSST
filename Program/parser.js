@@ -709,7 +709,7 @@ function parser(tokenType, symbolTable) {
             case (tokenType[pointer] === 'class'):
                 // console.log("before if", pointer);
                 if (isValidClass(tokenType, pointer)) {
-                    pointer++;
+                    return true; //Parser run successfully
                 }
                 continue;
         }
@@ -733,5 +733,5 @@ ll.removeAt(3)
 ll.printListData();
 
 // console.log(tokenType, "tokentype");
-parser(tokenType, symbolTable);
+console.log(parser(tokenType, symbolTable));
 
