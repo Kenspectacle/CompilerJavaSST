@@ -324,6 +324,7 @@ function isValidLocalDeclaration(tokenType) {
     if (isValidInteger(tokenType)
         && isValidIdentifier(tokenType)
         && isValidSemiColon(tokenType)) {
+        classLL.insertLast(token[pointer - 2]); //get the identifier
         return true;
     }
     return false;
