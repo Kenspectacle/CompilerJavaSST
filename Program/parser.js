@@ -703,7 +703,7 @@ function isValidClass(tokenType) {
 
 let pointer = 0;
 
-function parser(tokenType, token) {
+function parser(tokenType) {
     console.log('pointer:', pointer);
     console.log('tokentype.length', tokenType.length);
     while (pointer < tokenType.length) {
@@ -723,22 +723,6 @@ function parser(tokenType, token) {
 
 const classLL = new LinkedList();
 
-console.log("token!!!!", token)
-
+console.log(parser(tokenType))
+classLL.printListData()
 // console.log(tokenType, "tokentype");
-console.log(parser(tokenType, token));
-classLL.printListData();
-console.log(classLL)
-let a = "dasd"
-classLL.insertLast(a = new LinkedList);
-a.insertLast('hello');
-a.insertLast('testing')
-classLL.printListData();
-console.log('newList')
-a.printListData();
-classLL.insertLast(b = new LinkedList);
-console.log('================')
-b.insertLast('world')
-b.printListData();
-console.log('-------------------')
-classLL.printListData();
