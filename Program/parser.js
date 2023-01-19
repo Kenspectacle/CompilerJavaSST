@@ -18,8 +18,8 @@ const {LinkedList} = require('./linkedlist.cjs');
 
 const fs = require('fs') //read file
 const path = require('path');
-const scanner = require(path.resolve(__dirname, "./scanner.js")); // scanner
-const symbolTable = require(path.resolve(__dirname, "./symboltable.js")); //symbol table
+const {token, tokenType} = require(path.resolve(__dirname, "./scanner.js")); // scanner
+// const symbolTable = require(path.resolve(__dirname, "./symboltable.js")); //symbol table
 
 //util
 // const parserPreprocessor = require(path.resolve(__dirname, "Util/ParserPreprocessor.js"));
@@ -653,6 +653,9 @@ function isValidDeclaration(tokenType) {
                     && isValidSemiColon(tokenType)) {
                     console.log('kg4');
                     console.log(pointer);
+                    console.log(token)
+                    console.log('TOKEN!!', token[pointer - 4]);
+                    classLL.insertLast(token[pointer - 4]) //get the Identifier
                     continue;
                 }
             case ("int"):
@@ -661,6 +664,7 @@ function isValidDeclaration(tokenType) {
                     && isValidIdentifier(tokenType)
                     && isValidSemiColon(tokenType)) {
                     console.log(pointer)
+                    classLL.insertLast(token[pointer - 2]) //get the Identifier
                     continue;
                 }
             case ("public"):
@@ -698,9 +702,8 @@ function isValidClass(tokenType) {
 
 
 let pointer = 0;
-let token, tokenType = scanner(text);
 
-function parser(tokenType, symbolTable) {
+function parser(tokenType, token) {
     console.log('pointer:', pointer);
     console.log('tokentype.length', tokenType.length);
     while (pointer < tokenType.length) {
@@ -718,20 +721,24 @@ function parser(tokenType, symbolTable) {
     }
 }
 
-const ll = new LinkedList();
+const classLL = new LinkedList();
 
-ll.insertFirst(100);
-ll.insertFirst(200);
-ll.insertFirst(300);
-ll.insertLast(400);
-
-ll.insertAt(500, 2);
-// ll.getAt(2);
-ll.removeAt(3)
-
-
-ll.printListData();
+console.log("token!!!!", token)
 
 // console.log(tokenType, "tokentype");
-console.log(parser(tokenType, symbolTable));
-
+console.log(parser(tokenType, token));
+classLL.printListData();
+console.log(classLL)
+let a = "dasd"
+classLL.insertLast(a = new LinkedList);
+a.insertLast('hello');
+a.insertLast('testing')
+classLL.printListData();
+console.log('newList')
+a.printListData();
+classLL.insertLast(b = new LinkedList);
+console.log('================')
+b.insertLast('world')
+b.printListData();
+console.log('-------------------')
+classLL.printListData();

@@ -237,10 +237,10 @@ let scanner = (text) => {
     return token, tokenType;
 }
 
-module.exports = scanner;
 token, tokenType = scanner(text);
 console.dir(token, {'maxArrayLength': null});
 console.dir(tokenType, {'maxArrayLength': null});
+module.exports = {token, tokenType};
 
 
 
