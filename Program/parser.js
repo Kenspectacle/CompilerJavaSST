@@ -578,8 +578,14 @@ function isValidStatementSequence(tokenType) {
 //method type
 
 function isValidMethodType(tokenType) {
-    if (isValidVoid(tokenType)) return true;
-    if (isValidInteger(tokenType)) return true;
+    if (isValidVoid(tokenType)) {
+        classLL.insertLast(token[pointer])
+        return true;
+    }
+    if (isValidInteger(tokenType)) { 
+        classLL.insertLast(token[pointer])
+        return true;
+    }
     return false;
 
 }
