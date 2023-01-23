@@ -24,30 +24,11 @@ console.log(text);
 let start = "";
 let identifier = "";//for each identifiers
 let identifierGroup = []; //group up identifer later on
-let sym = new Map(); //set symbol as hashmap
 let token = []; //make a list of tokens
 let tokenType = []; //this describes, what kind of token it is
-
-//initialize hashmap
-sym.set('if', 0);
-sym.set('(', 0);
-sym.set(')', 0);
-sym.set('+', 0);
-sym.set('*', 0);
-sym.set('{', 0);
-sym.set('}', 0);
-sym.set('[', 0);
-sym.set(']', 0);
-sym.set('class', 0);
-sym.set('public', 0);
-sym.set('void', 0);
-sym.set('==', 0);
-sym.set('<', 0);
-sym.set('<=', 0);
-sym.set('>', 0);
-sym.set('>=', 0);
-sym.set('variable', 0);
-sym.set('int', 0);
+let newToken = {};
+let locColumn = 0;
+let locLine = 0;
 
 //single symbol list
 let singleSymbols = ['(', ')', '+', '*', '{', '}', '[', ']', ';', '-', ',', '/'];
@@ -62,7 +43,6 @@ let scanner = (text) => {
         switch (true) {
             //basic cases, single symbols
             case singleSymbols.includes(start):
-                sym.set(start, sym.get(start) + 1); //increase by one
                 token.push(start);
                 tokenType.push(start);
                 text = text.slice(1); //take out current index and move to next one
@@ -120,7 +100,6 @@ let scanner = (text) => {
                 }
             //numbers
             case /^[0-9]/.test(start):
-                sym.set('int', sym.get('int') + 1) //increment number by 1
                 let n = 0;
                 //while its still number look for the rest of the number
                 while (/^[0-9]/.test(text[n])) {
@@ -137,7 +116,6 @@ let scanner = (text) => {
                 // console.log('test');
                 if (text[1] === undefined || text[1] === " ") {
                     //end of string
-                    sym.set('variable', sym.get('variable') + 1); //increment number of variable
                     token.push(start);
                     tokenType.push('identifier');
                     text = text.slice(1);
@@ -148,7 +126,6 @@ let scanner = (text) => {
                     case ('c'):
                         //class keyword
                         if ((text[1] + text[2] + text[3] + text[4]) === "lass" && (text[5] === undefined || text[5]) === " ") {
-                            sym.set('class', sym.get('class') + 1); //increment by one
                             text = text.slice(5);
                             token.push('class');
                             tokenType.push('class');
@@ -158,7 +135,6 @@ let scanner = (text) => {
                     case ('p'):
                         //public keyword
                         if ((text[1] + text[2] + text[3] + text[4] + text[5]) === "ublic" && text[6] === undefined || text[6] === " ") {
-                            sym.set('public', sym.get('public') + 1);
                             text = text.slice(6);
                             token.push('public');
                             tokenType.push('public');
@@ -168,7 +144,6 @@ let scanner = (text) => {
                     case ('v'):
                         //void keyword
                         if ((text[1] + text[2] + text[3] === "oid") && (text[4] === undefined || text[4] === " ")) {
-                            sym.set('void', sym.get('void') + 1);
                             text = text.slice(4);
                             token.push('void');
                             tokenType.push('void');
@@ -177,7 +152,6 @@ let scanner = (text) => {
                     case ('i'):
                         //if keyword
                         if (text[1] === "f" && (text[2] === undefined || text[2] === " " || text[2] === "(")) {
-                            sym.set('if', sym.get('if') + 1);
                             text = text.slice(2);
                             token.push('if');
                             tokenType.push('if');
@@ -241,46 +215,3 @@ token, tokenType = scanner(text);
 console.dir(token, {'maxArrayLength': null});
 console.dir(tokenType, {'maxArrayLength': null});
 module.exports = {token, tokenType};
-
-
-
-// class Scanner {
-//     constructor(input, char, )
-// }
-
-
-
-
-
-
-
-
-
-
-
-// let text = ""
-// let start = ""
-
-
-
-// let next = () => {
-//     return;
-// }
-
-// let error = () => {
-//     console.error("Invalid First Character")
-// }
-
-// let first = (ch) => {
-//     //check what kind of character is it
-//     switch(c) {
-//         case 'i':
-//             break; //possibility of if
-//         default:
-//             error();
-//     }
-// }
-
-// let scanner = (text) => {
-
-// }
