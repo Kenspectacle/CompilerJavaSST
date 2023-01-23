@@ -341,23 +341,17 @@ function isValidFormalParametersSection() {
 
 //formal parameters
 function isValidFormalParameters() {
-    console.log('kg13')
-    console.log('pointerkg13', pointer)
     if (isValidLeftParenthesis()) {
-        console.log('kg14')
-        console.log('pointerkg14', pointer)
         if (isValidFormalParametersSection()) {
             //optional additional valid formal parameters
             while (tokens[pointer].contentType === ",") {
                 if (isValidComma()
                     && isValidFormalParametersSection()) {
                     if (isValidRightParenthesis()) { //check ending bracket
-                        console.log('kg15')
                         return true;
                     }
                 }
                 //not valid formal parameters
-                console.log(kg)
                 return false;
 
             }
@@ -566,7 +560,6 @@ function isValidStatementSequence() {
             || tokens[pointer].contentType === "return" // check for return
         ) {
             if (isValidStatement()) {
-                console.log('kg30')
                 continue;
             }
         }
@@ -596,8 +589,6 @@ function isValidMethodBody() {
     if (isValidLeftCurlyBracket()) {
         while (tokens[pointer].contentType === "int") {
             if (isValidLocalDeclaration()) {
-                console.log('kg20')
-                console.log('pointerkg20:', pointer)
                 continue; //check for local declaration, and then repeat the if to continue the pointer
             }
         }
@@ -614,13 +605,10 @@ function isValidMethodBody() {
 //method head
 
 function isValidMethodHead() {
-    console.log('kg11');
-    console.log('pointer:', pointer);
     if (isValidPublic()
         && isValidMethodType()
         && isValidIdentifier()
         && isValidFormalParameters()) {
-        console.log('kg12');
         return true;
     }
     return false;
@@ -628,11 +616,8 @@ function isValidMethodHead() {
 
 //method declaration
 function isValidMethodDeclaration() {
-    console.log('kg10');
-    console.log('pointerkg10:', pointer);
     if (isValidMethodHead()
         && isValidMethodBody()) {
-        console.log('kg12');
         return true;
     }
     return false;
@@ -642,31 +627,23 @@ function isValidMethodDeclaration() {
 //declarations
 function isValidDeclaration() {
     let validityFlag = false; //gets switch to true as soon as it enters at least one loop to see if its not an empty class!
-    console.log(pointer);
-    console.log();
     while (tokens[pointer].contentType === "final" || tokens[pointer].contentType === "int" || tokens[pointer].contentType === "public") {
         validityFlag = true;
-        console.log('kg2')
-        console.log('tokentypesssss', tokens[pointer].contentType)
         switch (tokens[pointer].contentType) {
             case ("final"):
-                console.log('kg3')
                 if (isValidFinal()
                     && isValidInteger()
                     && isValidIdentifier()
                     && isValidEqual()
                     && isValidExpression()
                     && isValidSemiColon()) {
-                    console.log('kg4');
                     classLL.insertLast(tokens[pointer - 4]) //get the Identifier
                     continue;
                 }
             case ("int"):
-                console.log('kg5')
                 if (isValidInteger()
                     && isValidIdentifier()
                     && isValidSemiColon()) {
-                    console.log(pointer)
                     classLL.insertLast(tokens[pointer - 2]) //get the Identifier
                     continue;
                 }
@@ -707,25 +684,17 @@ function isValidClass() {
 let pointer = 0;
 
 function parser() {
-    console.log('pointer:', pointer);
-    console.log('tokentype.length', tokens.length);
     while (pointer < tokens.length) {
         switch (true) {
             //possible starting symbols
             case (tokens[pointer].contentType === 'class'):
-                // console.log("before if", pointer);
                 if (isValidClass()) {
                     return true; //Parser run successfully
                 }
                 continue;
         }
-        // console.log('test');
-        // console.log(pointer);
     }
 }
-
 const classLL = new LinkedList();
-
 console.log(parser(tokens))
 classLL.printListData()
-// console.log(, "tokentype");
