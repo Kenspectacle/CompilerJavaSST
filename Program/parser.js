@@ -18,14 +18,13 @@ const {LinkedList} = require('./linkedlist.cjs');
 
 const fs = require('fs') //read file
 const path = require('path');
-const {token, tokenType} = require(path.resolve(__dirname, "./scanner.js")); // scanner
+const {tokens} = require(path.resolve(__dirname, "./scanner.js")); // scanner
 // const symbolTable = require(path.resolve(__dirname, "./symboltable.js")); //symbol table
 
 //util
 // const parserPreprocessor = require(path.resolve(__dirname, "Util/ParserPreprocessor.js"));
 
 let text = fs.readFileSync('./input.txt').toString()
-
 // preprocessedScannedText = parserPreprocessor(scanner(text));
 
 //Subroutines for parsing
@@ -33,8 +32,8 @@ let text = fs.readFileSync('./input.txt').toString()
 ////////////////////////////////////////////////////////////Identifiers and Numbers////////////////////////////////////////////////////////////
 
 //identifier
-function isValidIdentifier(tokenType) {
-    if (tokenType[pointer] === "identifier") {
+function isValidIdentifier() {
+    if (tokens[pointer].contentType === "identifier") {
         pointer++;
         return true;
     } else {
@@ -43,8 +42,8 @@ function isValidIdentifier(tokenType) {
 }
 
 //number
-function isValidNumber(tokenType) {
-    if (tokenType[pointer] === "number") {
+function isValidNumber() {
+    if (tokens[pointer].contentType === "number") {
         pointer++;
         return true;
     } else {
@@ -53,8 +52,8 @@ function isValidNumber(tokenType) {
 }
 
 //semicolon
-function isValidSemiColon(tokenType) {
-    if (tokenType[pointer] === ";") {
+function isValidSemiColon() {
+    if (tokens[pointer].contentType === ";") {
         pointer++;
         return true;
     } else {
@@ -63,8 +62,8 @@ function isValidSemiColon(tokenType) {
 }
 
 //comma
-function isValidComma(tokenType) {
-    if (tokenType[pointer] === ",") {
+function isValidComma() {
+    if (tokens[pointer].contentType === ",") {
         pointer++;
         return true;
     } else {
@@ -74,8 +73,8 @@ function isValidComma(tokenType) {
 
 ////////////////////////////////////////////////////////////Comparison////////////////////////////////////////////////////////////
 
-function isValidLess(tokenType) {
-    if (tokenType[pointer] === "<") {
+function isValidLess() {
+    if (tokens[pointer].contentType === "<") {
         pointer++;
         return true;
     } else {
@@ -83,8 +82,8 @@ function isValidLess(tokenType) {
     }
 }
 
-function isValidMore(tokenType) {
-    if (tokenType[pointer] === ">") {
+function isValidMore() {
+    if (tokens[pointer].contentType === ">") {
         pointer++;
         return true;
     } else {
@@ -92,8 +91,8 @@ function isValidMore(tokenType) {
     }
 }
 
-function isValidLessEqual(tokenType) {
-    if (tokenType[pointer] === "<=") {
+function isValidLessEqual() {
+    if (tokens[pointer].contentType === "<=") {
         pointer++;
         return true;
     } else {
@@ -101,8 +100,8 @@ function isValidLessEqual(tokenType) {
     }
 }
 
-function isValidEqualEqual(tokenType) {
-    if (tokenType[pointer] === "==") {
+function isValidEqualEqual() {
+    if (tokens[pointer].contentType === "==") {
         pointer++;
         return true;
     } else {
@@ -110,8 +109,8 @@ function isValidEqualEqual(tokenType) {
     }
 }
 
-function isValidMoreEqual(tokenType) {
-    if (tokenType[pointer] === ">=") {
+function isValidMoreEqual() {
+    if (tokens[pointer].contentType === ">=") {
         pointer++;
         return true;
     } else {
@@ -121,8 +120,8 @@ function isValidMoreEqual(tokenType) {
 
 ////////////////////////////////////////////////////////////Arithmetic Expressions////////////////////////////////////////////////////////////
 
-function isValidPlus(tokenType) {
-    if (tokenType[pointer] === "+") {
+function isValidPlus() {
+    if (tokens[pointer].contentType === "+") {
         pointer++;
         return true;
     } else {
@@ -130,8 +129,8 @@ function isValidPlus(tokenType) {
     }
 }
 
-function isValidMinus(tokenType) {
-    if (tokenType[pointer] === "-") {
+function isValidMinus() {
+    if (tokens[pointer].contentType === "-") {
         pointer++;
         return true;
     } else {
@@ -139,8 +138,8 @@ function isValidMinus(tokenType) {
     }
 }
 
-function isValidTimes(tokenType) {
-    if (tokenType[pointer] === "*") {
+function isValidTimes() {
+    if (tokens[pointer].contentType === "*") {
         pointer++;
         return true;
     } else {
@@ -148,8 +147,8 @@ function isValidTimes(tokenType) {
     }
 }
 
-function isValidDivision(tokenType) {
-    if (tokenType[pointer] === "/") {
+function isValidDivision() {
+    if (tokens[pointer].contentType === "/") {
         pointer++;
         return true;
     } else {
@@ -157,8 +156,8 @@ function isValidDivision(tokenType) {
     }
 }
 
-function isValidEqual(tokenType) {
-    if (tokenType[pointer] === "=") {
+function isValidEqual() {
+    if (tokens[pointer].contentType === "=") {
         pointer++;
         return true;
     } else {
@@ -168,8 +167,8 @@ function isValidEqual(tokenType) {
 ////////////////////////////////////////////////////////////Curly Brackets////////////////////////////////////////////////////////////
 
 //left curly bracket
-function isValidLeftCurlyBracket(tokenType) {
-    if (tokenType[pointer] === "{") {
+function isValidLeftCurlyBracket() {
+    if (tokens[pointer].contentType === "{") {
         pointer++;
         return true;
     } else {
@@ -178,8 +177,8 @@ function isValidLeftCurlyBracket(tokenType) {
 }
 
 //right curly bracket
-function isValidRightCurlyBracket(tokenType) {
-    if (tokenType[pointer] === "}") {
+function isValidRightCurlyBracket() {
+    if (tokens[pointer].contentType === "}") {
         pointer++;
         return true;
     } else {
@@ -190,8 +189,8 @@ function isValidRightCurlyBracket(tokenType) {
 ////////////////////////////////////////////////////////////Square Brackets////////////////////////////////////////////////////////////
 
 //left square bracket
-function isValidLeftSquareBracket(tokenType) {
-    if (tokenType[pointer] === "[") {
+function isValidLeftSquareBracket() {
+    if (tokens[pointer].contentType === "[") {
         pointer++;
         return true;
     } else {
@@ -200,8 +199,8 @@ function isValidLeftSquareBracket(tokenType) {
 }
 
 //right square bracket
-function isValidRightSquareBracket(tokenType) {
-    if (tokenType[pointer] === "]") {
+function isValidRightSquareBracket() {
+    if (tokens[pointer].contentType === "]") {
         pointer++;
         return true;
     } else {
@@ -212,8 +211,8 @@ function isValidRightSquareBracket(tokenType) {
 ////////////////////////////////////////////////////////////Parenthesis////////////////////////////////////////////////////////////
 
 //left parenthesis
-function isValidLeftParenthesis(tokenType) {
-    if (tokenType[pointer] === "(") {
+function isValidLeftParenthesis() {
+    if (tokens[pointer].contentType === "(") {
         pointer++;
         return true;
     } else {
@@ -222,8 +221,8 @@ function isValidLeftParenthesis(tokenType) {
 }
 
 //right parenthesis
-function isValidRightParenthesis(tokenType) {
-    if (tokenType[pointer] === ")") {
+function isValidRightParenthesis() {
+    if (tokens[pointer].contentType === ")") {
         pointer++;
         return true;
     } else {
@@ -233,8 +232,8 @@ function isValidRightParenthesis(tokenType) {
 
 ////////////////////////////////////////////////////////////Datatype////////////////////////////////////////////////////////////
 
-function isValidInteger(tokenType) {
-    if (tokenType[pointer] === "int") {
+function isValidInteger() {
+    if (tokens[pointer].contentType === "int") {
         pointer++;
         return true;
     } else {
@@ -244,8 +243,8 @@ function isValidInteger(tokenType) {
 
 ////////////////////////////////////////////////////////////Special Keywords////////////////////////////////////////////////////////////
 
-function isValidFinal(tokenType) {
-    if (tokenType[pointer] === "final") {
+function isValidFinal() {
+    if (tokens[pointer].contentType === "final") {
         pointer++;
         return true;
     } else {
@@ -253,8 +252,8 @@ function isValidFinal(tokenType) {
     }
 }
 
-function isValidPublic(tokenType) {
-    if (tokenType[pointer] === "public") {
+function isValidPublic() {
+    if (tokens[pointer].contentType === "public") {
         pointer++;
         return true;
     } else {
@@ -262,8 +261,8 @@ function isValidPublic(tokenType) {
     }
 }
 
-function isValidVoid(tokenType) {
-    if (tokenType[pointer] === "void") {
+function isValidVoid() {
+    if (tokens[pointer].contentType === "void") {
         pointer++;
         return true;
     } else {
@@ -271,8 +270,8 @@ function isValidVoid(tokenType) {
     }
 }
 
-function isValidIf(tokenType) {
-    if (tokenType[pointer] === "if") {
+function isValidIf() {
+    if (tokens[pointer].contentType === "if") {
         pointer++;
         return true;
     } else {
@@ -280,8 +279,8 @@ function isValidIf(tokenType) {
     }
 }
 
-function isValidElse(tokenType) {
-    if (tokenType[pointer] === "else") {
+function isValidElse() {
+    if (tokens[pointer].contentType === "else") {
         pointer++;
         return true;
     } else {
@@ -289,8 +288,8 @@ function isValidElse(tokenType) {
     }
 }
 
-function isValidWhile(tokenType) {
-    if (tokenType[pointer] === "while") {
+function isValidWhile() {
+    if (tokens[pointer].contentType === "while") {
         pointer++;
         return true;
     } else {
@@ -298,8 +297,8 @@ function isValidWhile(tokenType) {
     }
 }
 
-function isValidReturn(tokenType) {
-    if (tokenType[pointer] === "return") {
+function isValidReturn() {
+    if (tokens[pointer].contentType === "return") {
         pointer++;
         return true;
     } else {
@@ -320,20 +319,20 @@ Serial = use && boolean logic, will shortcircuit at the part where it is wrong
 
 //local declaration
 
-function isValidLocalDeclaration(tokenType) {
-    if (isValidInteger(tokenType)
-        && isValidIdentifier(tokenType)
-        && isValidSemiColon(tokenType)) {
-        classLL.insertLast(token[pointer - 2]); //get the identifier
+function isValidLocalDeclaration() {
+    if (isValidInteger()
+        && isValidIdentifier()
+        && isValidSemiColon()) {
+        classLL.insertLast(tokens[pointer - 2]); //get the identifier
         return true;
     }
     return false;
 }
 
 //formal parameters section
-function isValidFormalParametersSection(tokenType) {
-    if (isValidInteger(tokenType)
-        && isValidIdentifier(tokenType)) {
+function isValidFormalParametersSection() {
+    if (isValidInteger()
+        && isValidIdentifier()) {
         return true;
     } else {
         return false;
@@ -341,18 +340,18 @@ function isValidFormalParametersSection(tokenType) {
 }
 
 //formal parameters
-function isValidFormalParameters(tokenType) {
+function isValidFormalParameters() {
     console.log('kg13')
     console.log('pointerkg13', pointer)
-    if (isValidLeftParenthesis(tokenType)) {
+    if (isValidLeftParenthesis()) {
         console.log('kg14')
         console.log('pointerkg14', pointer)
-        if (isValidFormalParametersSection(tokenType)) {
+        if (isValidFormalParametersSection()) {
             //optional additional valid formal parameters
-            while (tokenType[pointer] === ",") {
-                if (isValidComma(tokenType)
-                    && isValidFormalParametersSection(tokenType)) {
-                    if (isValidRightParenthesis(tokenType)) { //check ending bracket
+            while (tokens[pointer].contentType === ",") {
+                if (isValidComma()
+                    && isValidFormalParametersSection()) {
+                    if (isValidRightParenthesis()) { //check ending bracket
                         console.log('kg15')
                         return true;
                     }
@@ -364,43 +363,43 @@ function isValidFormalParameters(tokenType) {
             }
 
         }
-        if (isValidRightParenthesis(tokenType)) {
+        if (isValidRightParenthesis()) {
             return true;
         }
     }
 }
 
 //assignment
-function isValidAssignment(tokenType) {
-    if (isValidIdentifier(tokenType)
-        && isValidEqual(tokenType)
-        && isValidExpression(tokenType)
-        && isValidSemiColon(tokenType)) {
+function isValidAssignment() {
+    if (isValidIdentifier()
+        && isValidEqual()
+        && isValidExpression()
+        && isValidSemiColon()) {
         return true;
     }
     return false;
 }
 
 //factor
-function isValidFactor(tokenType) {
+function isValidFactor() {
     let tempPointer = pointer;
     //lots of OR statement in the EBNF
-    if (isValidLeftParenthesis(tokenType) && isValidExpression(tokenType) && isValidRightParenthesis(tokenType)) {
+    if (isValidLeftParenthesis() && isValidExpression() && isValidRightParenthesis()) {
         return true;
     } else {
         pointer = tempPointer;
     }
-    if (isValidInternProcedureCall(tokenType)) { //check for intern procedure call first, since identifier is a subset of it
+    if (isValidInternProcedureCall()) { //check for intern procedure call first, since identifier is a subset of it
         return true;
     } else {
         pointer = tempPointer;
     }
-    if (isValidNumber(tokenType)) {
+    if (isValidNumber()) {
         return true;
     } else {
         pointer = tempPointer;
     }
-    if (isValidIdentifier(tokenType)) {
+    if (isValidIdentifier()) {
         return true;
     } else {
         pointer = tempPointer;
@@ -409,13 +408,13 @@ function isValidFactor(tokenType) {
 }
 
 //term
-function isValidTerm(tokenType) {
-    if (isValidFactor(tokenType)) {
+function isValidTerm() {
+    if (isValidFactor()) {
         //optional additional factors
-        while (tokenType[pointer] === "*" || tokenType[pointer] === "/") {
-            if ((isValidTimes(tokenType)
-                || isValidDivision(tokenType))
-                && isValidFactor(tokenType)) {
+        while (tokens[pointer].contentType === "*" || tokens[pointer].contentType === "/") {
+            if ((isValidTimes()
+                || isValidDivision())
+                && isValidFactor()) {
                 return true;
             }
             return false;
@@ -426,13 +425,13 @@ function isValidTerm(tokenType) {
 }
 
 //simple expression
-function isValidSimpleExpression(tokenType) {
-    if (isValidTerm(tokenType)) {
+function isValidSimpleExpression() {
+    if (isValidTerm()) {
         //optional repeating additional terms
-        while (tokenType[pointer] === "+" || tokenType[pointer] === "-") {
-            if ((isValidPlus(tokenType)
-                || isValidMinus(tokenType))
-                && isValidTerm(tokenType)) {
+        while (tokens[pointer].contentType === "+" || tokens[pointer].contentType === "-") {
+            if ((isValidPlus()
+                || isValidMinus())
+                && isValidTerm()) {
                 return true;
             }
             return false; //only a plus/minus at the end with no additional term, false
@@ -443,15 +442,15 @@ function isValidSimpleExpression(tokenType) {
 }
 
 //expression
-function isValidExpression(tokenType) {
-    if (isValidSimpleExpression(tokenType)) {
+function isValidExpression() {
+    if (isValidSimpleExpression()) {
         //optional compared simple expressions
-        if ((isValidLess(tokenType)
-            || isValidMore(tokenType)
-            || isValidEqualEqual(tokenType)
-            || isValidMoreEqual(tokenType)
-            || isValidLessEqual(tokenType))
-            && isValidSimpleExpression(tokenType)) {
+        if ((isValidLess()
+            || isValidMore()
+            || isValidEqualEqual()
+            || isValidMoreEqual()
+            || isValidLessEqual())
+            && isValidSimpleExpression()) {
             return true;
         }
         return true;
@@ -460,19 +459,19 @@ function isValidExpression(tokenType) {
 }
 
 //actual parameter
-function isValidActualParameters(tokenType) {
-    if (isValidLeftParenthesis(tokenType)) {
+function isValidActualParameters() {
+    if (isValidLeftParenthesis()) {
         //optional expression
-        if (isValidExpression(tokenType)) {
-            while (tokenType[pointer] === ",") {
-                if (isValidComma(tokenType)
-                    && isValidExpression(tokenType)
-                    && isValidRightParenthesis(tokenType)) {
+        if (isValidExpression()) {
+            while (tokens[pointer].contentType === ",") {
+                if (isValidComma()
+                    && isValidExpression()
+                    && isValidRightParenthesis()) {
                     return true;
                 }
             }
         }
-        if (isValidRightParenthesis(tokenType)) {
+        if (isValidRightParenthesis()) {
             return true;
         }
         return false;
@@ -481,60 +480,60 @@ function isValidActualParameters(tokenType) {
 }
 
 //intern procedure call
-function isValidInternProcedureCall(tokenType) {
-    if (isValidIdentifier(tokenType) && isValidActualParameters(tokenType)) {
+function isValidInternProcedureCall() {
+    if (isValidIdentifier() && isValidActualParameters()) {
         return true;
     }
     return false;
 }
 
 //procedure call
-function isValidProcedureCall(tokenType) {
-    if (isValidInternProcedureCall(tokenType)
-        && isValidSemiColon(tokenType)) {
+function isValidProcedureCall() {
+    if (isValidInternProcedureCall()
+        && isValidSemiColon()) {
         return true;
     }
     return false;
 }
 
 // if statement
-function isValidIfStatement(tokenType) {
-    if (isValidIf(tokenType)
-        && isValidLeftParenthesis(tokenType)
-        && isValidExpression(tokenType)
-        && isValidRightParenthesis(tokenType)
-        && isValidLeftCurlyBracket(tokenType)
-        && isValidStatementSequence(tokenType)
-        && isValidRightCurlyBracket(tokenType)
-        && isValidElse(tokenType)
-        && isValidLeftCurlyBracket(tokenType)
-        && isValidStatementSequence(tokenType)
-        && isValidRightCurlyBracket(tokenType)) {
+function isValidIfStatement() {
+    if (isValidIf()
+        && isValidLeftParenthesis()
+        && isValidExpression()
+        && isValidRightParenthesis()
+        && isValidLeftCurlyBracket()
+        && isValidStatementSequence()
+        && isValidRightCurlyBracket()
+        && isValidElse()
+        && isValidLeftCurlyBracket()
+        && isValidStatementSequence()
+        && isValidRightCurlyBracket()) {
         return true;
     }
     return false;
 }
 
 //while statement
-function isValidWhileStatement(tokenType) {
-    if (isValidWhile(tokenType)
-        && isValidLeftParenthesis(tokenType)
-        && isValidExpression(tokenType)
-        && isValidRightParenthesis(tokenType)
-        && isValidLeftCurlyBracket(tokenType)
-        && isValidStatementSequence(tokenType)
-        && isValidRightCurlyBracket(tokenType)) {
+function isValidWhileStatement() {
+    if (isValidWhile()
+        && isValidLeftParenthesis()
+        && isValidExpression()
+        && isValidRightParenthesis()
+        && isValidLeftCurlyBracket()
+        && isValidStatementSequence()
+        && isValidRightCurlyBracket()) {
         return true;
     }
     return false;
 }
 
 //return statement
-function isValidReturnStatement(tokenType) {
-    if (isValidReturn(tokenType)) {
-        if (isValidSimpleExpression(tokenType) && isValidSemiColon(tokenType)) {
+function isValidReturnStatement() {
+    if (isValidReturn()) {
+        if (isValidSimpleExpression() && isValidSemiColon()) {
             return true;
-        } else if (isValidSemiColon(tokenType)) {
+        } else if (isValidSemiColon()) {
             return true;
         }
         return false;
@@ -543,30 +542,30 @@ function isValidReturnStatement(tokenType) {
 }
 
 //statement
-function isValidStatement(tokenType) {
+function isValidStatement() {
     let tempPointer = pointer;
-    if (isValidAssignment(tokenType)) {
+    if (isValidAssignment()) {
         return true;
     } else {
         pointer = tempPointer;
     }
-    if (isValidProcedureCall(tokenType)) return true;
-    if (isValidIfStatement(tokenType)) return true;
-    if (isValidWhileStatement(tokenType)) return true;
-    if (isValidReturnStatement(tokenType)) return true;
+    if (isValidProcedureCall()) return true;
+    if (isValidIfStatement()) return true;
+    if (isValidWhileStatement()) return true;
+    if (isValidReturnStatement()) return true;
     return false;
 }
 
 //statement sequence
 
-function isValidStatementSequence(tokenType) {
-    if (isValidStatement(tokenType)) {
-        while (tokenType[pointer] === "identifier" //check for Assignment and Procedure Call
-            || tokenType[pointer] === "if" //check for if
-            || tokenType[pointer] === "while" //check for while
-            || tokenType[pointer] === "return" // check for return
+function isValidStatementSequence() {
+    if (isValidStatement()) {
+        while (tokens[pointer].contentType === "identifier" //check for Assignment and Procedure Call
+            || tokens[pointer].contentType === "if" //check for if
+            || tokens[pointer].contentType === "while" //check for while
+            || tokens[pointer].contentType === "return" // check for return
         ) {
-            if (isValidStatement(tokenType)) {
+            if (isValidStatement()) {
                 console.log('kg30')
                 continue;
             }
@@ -578,13 +577,13 @@ function isValidStatementSequence(tokenType) {
 
 //method type
 
-function isValidMethodType(tokenType) {
-    if (isValidVoid(tokenType)) {
-        classLL.insertLast(token[pointer])
+function isValidMethodType() {
+    if (isValidVoid()) {
+        classLL.insertLast(tokens[pointer])
         return true;
     }
-    if (isValidInteger(tokenType)) { 
-        classLL.insertLast(token[pointer])
+    if (isValidInteger()) { 
+        classLL.insertLast(tokens[pointer])
         return true;
     }
     return false;
@@ -593,18 +592,18 @@ function isValidMethodType(tokenType) {
 
 //method body
 
-function isValidMethodBody(tokenType) {
-    if (isValidLeftCurlyBracket(tokenType)) {
-        while (tokenType[pointer] === "int") {
-            if (isValidLocalDeclaration(tokenType)) {
+function isValidMethodBody() {
+    if (isValidLeftCurlyBracket()) {
+        while (tokens[pointer].contentType === "int") {
+            if (isValidLocalDeclaration()) {
                 console.log('kg20')
                 console.log('pointerkg20:', pointer)
                 continue; //check for local declaration, and then repeat the if to continue the pointer
             }
         }
         //breaks as soon as there are no longer any local declarations
-        if (isValidStatementSequence(tokenType)
-            && isValidRightCurlyBracket(tokenType)) {
+        if (isValidStatementSequence()
+            && isValidRightCurlyBracket()) {
             return true;
         }
         return false;
@@ -614,13 +613,13 @@ function isValidMethodBody(tokenType) {
 
 //method head
 
-function isValidMethodHead(tokenType) {
+function isValidMethodHead() {
     console.log('kg11');
     console.log('pointer:', pointer);
-    if (isValidPublic(tokenType)
-        && isValidMethodType(tokenType)
-        && isValidIdentifier(tokenType)
-        && isValidFormalParameters(tokenType)) {
+    if (isValidPublic()
+        && isValidMethodType()
+        && isValidIdentifier()
+        && isValidFormalParameters()) {
         console.log('kg12');
         return true;
     }
@@ -628,11 +627,11 @@ function isValidMethodHead(tokenType) {
 }
 
 //method declaration
-function isValidMethodDeclaration(tokenType) {
+function isValidMethodDeclaration() {
     console.log('kg10');
     console.log('pointerkg10:', pointer);
-    if (isValidMethodHead(tokenType)
-        && isValidMethodBody(tokenType)) {
+    if (isValidMethodHead()
+        && isValidMethodBody()) {
         console.log('kg12');
         return true;
     }
@@ -641,41 +640,38 @@ function isValidMethodDeclaration(tokenType) {
 
 
 //declarations
-function isValidDeclaration(tokenType) {
+function isValidDeclaration() {
     let validityFlag = false; //gets switch to true as soon as it enters at least one loop to see if its not an empty class!
     console.log(pointer);
-    console.log(tokenType);
-    while (tokenType[pointer] === "final" || tokenType[pointer] === "int" || tokenType[pointer] === "public") {
+    console.log();
+    while (tokens[pointer].contentType === "final" || tokens[pointer].contentType === "int" || tokens[pointer].contentType === "public") {
         validityFlag = true;
         console.log('kg2')
-        console.log('tokentypesssss', tokenType[pointer])
-        switch (tokenType[pointer]) {
+        console.log('tokentypesssss', tokens[pointer].contentType)
+        switch (tokens[pointer].contentType) {
             case ("final"):
                 console.log('kg3')
-                if (isValidFinal(tokenType)
-                    && isValidInteger(tokenType)
-                    && isValidIdentifier(tokenType)
-                    && isValidEqual(tokenType)
-                    && isValidExpression(tokenType)
-                    && isValidSemiColon(tokenType)) {
+                if (isValidFinal()
+                    && isValidInteger()
+                    && isValidIdentifier()
+                    && isValidEqual()
+                    && isValidExpression()
+                    && isValidSemiColon()) {
                     console.log('kg4');
-                    console.log(pointer);
-                    console.log(token)
-                    console.log('TOKEN!!', token[pointer - 4]);
-                    classLL.insertLast(token[pointer - 4]) //get the Identifier
+                    classLL.insertLast(tokens[pointer - 4]) //get the Identifier
                     continue;
                 }
             case ("int"):
                 console.log('kg5')
-                if (isValidInteger(tokenType)
-                    && isValidIdentifier(tokenType)
-                    && isValidSemiColon(tokenType)) {
+                if (isValidInteger()
+                    && isValidIdentifier()
+                    && isValidSemiColon()) {
                     console.log(pointer)
-                    classLL.insertLast(token[pointer - 2]) //get the Identifier
+                    classLL.insertLast(tokens[pointer - 2]) //get the Identifier
                     continue;
                 }
             case ("public"):
-                if (isValidMethodDeclaration(tokenType)) {
+                if (isValidMethodDeclaration()) {
                     continue;
                 }
         }
@@ -685,21 +681,21 @@ function isValidDeclaration(tokenType) {
 
 //class body
 
-function isValidClassBody(tokenType) {
-    if (isValidLeftCurlyBracket(tokenType)
-        && isValidDeclaration(tokenType)
-        && isValidRightCurlyBracket(tokenType)) {
+function isValidClassBody() {
+    if (isValidLeftCurlyBracket()
+        && isValidDeclaration()
+        && isValidRightCurlyBracket()) {
         return true;
     }
     return false;
 }
 
 //class
-function isValidClass(tokenType) {
-    if (tokenType[pointer] === "class") {
+function isValidClass() {
+    if (tokens[pointer].contentType === "class") {
         pointer++;
-        if (isValidIdentifier(tokenType)
-            && isValidClassBody(tokenType)) {
+        if (isValidIdentifier()
+            && isValidClassBody()) {
             return true;
         }
     }
@@ -710,15 +706,15 @@ function isValidClass(tokenType) {
 
 let pointer = 0;
 
-function parser(tokenType) {
+function parser() {
     console.log('pointer:', pointer);
-    console.log('tokentype.length', tokenType.length);
-    while (pointer < tokenType.length) {
+    console.log('tokentype.length', tokens.length);
+    while (pointer < tokens.length) {
         switch (true) {
             //possible starting symbols
-            case (tokenType[pointer] === 'class'):
+            case (tokens[pointer].contentType === 'class'):
                 // console.log("before if", pointer);
-                if (isValidClass(tokenType, pointer)) {
+                if (isValidClass()) {
                     return true; //Parser run successfully
                 }
                 continue;
@@ -730,6 +726,6 @@ function parser(tokenType) {
 
 const classLL = new LinkedList();
 
-console.log(parser(tokenType))
+console.log(parser(tokens))
 classLL.printListData()
-// console.log(tokenType, "tokentype");
+// console.log(, "tokentype");
