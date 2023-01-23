@@ -323,7 +323,8 @@ function isValidLocalDeclaration() {
     if (isValidInteger()
         && isValidIdentifier()
         && isValidSemiColon()) {
-        classLL.insertLast(tokens[pointer - 2]); //get the identifier
+        tokens[pointer - 2].scope = tempCurrMethod;
+        symbolTable.insertLast(tokens[pointer - 2]); //get the identifier
         return true;
     }
     return false;
@@ -570,17 +571,17 @@ function isValidStatementSequence() {
 
 //method type
 
+let tempCurrMethod = ""; //treated as a static variable, used to determine variable scope
 function isValidMethodType() {
     if (isValidVoid()) {
-        classLL.insertLast(tokens[pointer])
+        tempCurrMethod = tokens[pointer].content;
         return true;
     }
-    if (isValidInteger()) { 
-        classLL.insertLast(tokens[pointer])
+    if (isValidInteger()) {
+        tempCurrMethod = tokens[pointer].content;
         return true;
     }
     return false;
-
 }
 
 //method body
@@ -637,14 +638,16 @@ function isValidDeclaration() {
                     && isValidEqual()
                     && isValidExpression()
                     && isValidSemiColon()) {
-                    classLL.insertLast(tokens[pointer - 4]) //get the Identifier
+                    tokens[pointer - 4].scope = "class";
+                    symbolTable.insertLast(tokens[pointer - 4]) //get the Identifier
                     continue;
                 }
             case ("int"):
                 if (isValidInteger()
                     && isValidIdentifier()
                     && isValidSemiColon()) {
-                    classLL.insertLast(tokens[pointer - 2]) //get the Identifier
+                    tokens[pointer - 2].scope = "class";
+                    symbolTable.insertLast(tokens[pointer - 2]) //get the Identifier
                     continue;
                 }
             case ("public"):
@@ -695,6 +698,6 @@ function parser() {
         }
     }
 }
-const classLL = new LinkedList();
+const symbolTable = new LinkedList();
 console.log(parser(tokens))
-classLL.printListData()
+symbolTable.printListData()
