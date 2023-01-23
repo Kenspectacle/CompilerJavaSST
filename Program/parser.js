@@ -14,11 +14,11 @@ for loop
 */
 
 //Class Imports
-const {LinkedList} = require('./linkedlist.cjs');
+const { LinkedList } = require('./linkedlist.cjs');
 
 const fs = require('fs') //read file
 const path = require('path');
-const {tokens} = require(path.resolve(__dirname, "./scanner.js")); // scanner
+const { tokens } = require(path.resolve(__dirname, "./scanner.js")); // scanner
 // const symbolTable = require(path.resolve(__dirname, "./symboltable.js")); //symbol table
 
 //util
@@ -625,38 +625,36 @@ function isValidMethodDeclaration() {
 }
 
 
-//declarations
 function isValidDeclaration() {
-    let validityFlag = false; //gets switch to true as soon as it enters at least one loop to see if its not an empty class!
-    while (tokens[pointer].contentType === "final" || tokens[pointer].contentType === "int" || tokens[pointer].contentType === "public") {
-        validityFlag = true;
-        switch (tokens[pointer].contentType) {
-            case ("final"):
-                if (isValidFinal()
-                    && isValidInteger()
-                    && isValidIdentifier()
-                    && isValidEqual()
-                    && isValidExpression()
-                    && isValidSemiColon()) {
-                    tokens[pointer - 4].scope = "class";
-                    symbolTable.insertLast(tokens[pointer - 4]) //get the Identifier
-                    continue;
-                }
-            case ("int"):
-                if (isValidInteger()
-                    && isValidIdentifier()
-                    && isValidSemiColon()) {
-                    tokens[pointer - 2].scope = "class";
-                    symbolTable.insertLast(tokens[pointer - 2]) //get the Identifier
-                    continue;
-                }
-            case ("public"):
-                if (isValidMethodDeclaration()) {
-                    continue;
-                }
+    while (tokens[pointer].contentType === "final") {
+        if (isValidFinal()
+            && isValidInteger()
+            && isValidIdentifier()
+            && isValidEqual()
+            && isValidExpression()
+            && isValidSemiColon()) {
+            tokens[pointer - 4].scope = "class";
+            symbolTable.insertLast(tokens[pointer - 4]) //get the Identifier
         }
     }
-    return validityFlag;
+    while (tokens[pointer].contentType === "int") {
+        if (isValidInteger()
+            && isValidIdentifier()
+            && isValidSemiColon()) {
+            tokens[pointer - 2].scope = "class";
+            symbolTable.insertLast(tokens[pointer - 2]) //get the Identifier
+        }
+    }
+    //check current pointer, throw exception if it doesn't follow the order
+    if(tokens[pointer]) {
+        throw `current Token ${tokens[pointer].contentType} is not public or int. Invalid
+        Token found at Line: ${tokens[pointer].locLine}, Column ${tokens[pointer].locColumn}`
+    }
+    while (tokens[pointer].contentType === "public") {
+        if (isValidMethodDeclaration()){
+        }
+    }
+    return true;
 }
 
 //class body
@@ -699,5 +697,6 @@ function parser() {
     }
 }
 const symbolTable = new LinkedList();
+console.log(tokens[0])
 console.log(parser(tokens))
 symbolTable.printListData()
